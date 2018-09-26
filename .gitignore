@@ -1,0 +1,4 @@
+backend/setup_env.sh
+*.pyc
+*.pyo
+.cache-*

@@ -1,7 +1,109 @@
-from flask import Flask
+from flask import Flask, request, redirect
+from pymongo import MongoClient
 
+import os
+import spotipy
+import spotipy.util as util
+from spotipy.oauth2 import SpotifyOAuth
+
+'''
+Create the flask app
+'''
 app = Flask(__name__)
+
+'''
+Spotify instances
+'''
+spotify = spotipy.Spotify()
+
+username = 'bullenbygg1337'
+client_id = os.environ['CLIENT_ID']
+client_secret = os.environ['CLIENT_SECRET']
+redirect_uri='http://127.0.0.1:5000/authorize_success'
+scope='user-library-read'
+cache_path = ".cache-" + username
+
+sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, 
+        scope=scope, cache_path=cache_path)
+
+'''
+Database
+'''
+client = MongoClient('localhost', 27017)
+db = client['harmonize']
 
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
+
+def search(name):
+    return spotify.search(q='artist:' + name, type='artist')
+
+@app.route('/search_test')
+def search_test():
+    return search('Rebelion')
+
+@app.route('/authorize')
+def authorize(username='bullenbygg1337'):
+
+    token_info = sp_oauth.get_cached_token()
+
+    if not token_info:
+        auth_url = sp_oauth.get_authorize_url()
+        return redirect(auth_url, code=200)
+
+    access_token = token_info['access_token']
+    spotify = spotipy.Spotify(auth=access_token)
+    result = spotify.search(q='artist: Rebelion', type='artist')
+    print('Authorize')
+
+    return str(result)
+
+
+@app.route('/authorize_success')
+def authorize_success():
+    access_code = request.args.get('code', '')
+
+    # Get the token and cache it
+    token_info = sp_oauth.get_access_token(access_code)
+
+    return "Authorization: Successful!"
+
+@app.route('/playlists')
+def get_playlists():
+    token_info = sp_oauth.get_cached_token()
+    access_token = token_info['access_token']
+    spotify = spotipy.Spotify(auth=access_token)
+    results = spotify.user_playlists(username)
+    for r in results['items']:
+        print(r['name'])
+    return str(results)
+
+@app.route('/insert_test')
+def insert_test():
+    db.users.insert_one({'username':'bullenbygg1337'})
+    return 'done!'
+
+@app.route('/play')
+def play_song():
+    get_spotify_lib().start_playback()
+    return "xd"
+    
+'''
+Helper functions
+'''
+def send_request(req_fn, **kwargs):
+    # Get the access token which is required 
+    # to send requests
+    token_info   = sp_oauth.get_cached_token()
+    access_token = token_info['access_token']
+
+    spotify = spotipy.Spotify(auth=access_token)
+
+    results = spotify.req_fn(**kwargs)
+
+def get_spotify_lib():
+    token_info   = sp_oauth.get_cached_token()
+    access_token = token_info['access_token']
+
+    return spotipy.Spotify(auth=access_token)
