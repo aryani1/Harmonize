@@ -41,6 +41,7 @@ def hello_world():
 def search(name):
     return spotify.search(q='artist:' + name, type='artist')
 
+# Authorize a user 
 @app.route('/authorize')
 def authorize():
 
@@ -57,16 +58,17 @@ def authorize():
 
     return str(result)
 
-
+# Get and cache access token
 @app.route('/authorize_success')
 def authorize_success():
     access_code = request.args.get('code', '')
 
     # Get the token and cache it
     token_info = sp_oauth.get_access_token(access_code)
-    
+
     return "Authorization: Successful!"
 
+# Get playlists
 @app.route('/playlists')
 def get_playlists():
     token_info = sp_oauth.get_cached_token()
@@ -82,10 +84,22 @@ def insert_test():
     db.users.insert_one({'username':'bullenbygg1337'})
     return 'done!'
 
+# Start playing
 @app.route('/play')
 def play_song():
     get_spotify_lib().start_playback()
     return "xd"
+
+# Get tracks from a playlist
+@app.route('/playlists/<playlist_id>')
+def get_playlist(playlist_id):
+    token_info = sp_oauth.get_cached_token()
+    access_token = token_info['access_token']
+
+    spotify = spotipy.Spotify(auth=access_token)
+    results = spotify.user_playlist_tracks(username, playlist_id)
+
+    return jsonify(results)
     
 '''
 Helper functions

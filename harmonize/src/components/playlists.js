@@ -9,7 +9,6 @@ const Playlists = ({playlists}) => {
                 {
                     playlists.map(playlist => {
                         return( 
-                            // <div key={playlist.id}> {playlist.name} </div> 
                             <Playlist key={playlist.id} playlist={playlist} />
                         )
                     })
@@ -23,9 +22,21 @@ const Playlists = ({playlists}) => {
 }
 
 const Playlist= ({playlist}) => {
+    console.log(playlist.images[0].height)
     return(
-        <div> {playlist.name} </div>
+        <div key={playlist.id} className="playlist" onClick = { () => fetchTracks(playlist) } >
+            <img className="nav-img" src={playlist.images[0].url} height="60" width="60"/>
+            <div>
+                {playlist.name}
+            </div>
+        </div>
     )
+}
+
+const fetchTracks = playlist => {
+    return fetch("http://127.0.0.1:5000/playlists/" + playlist.id).then(data =>
+    data.json()
+  );
 }
 
 const mapStateToProps = state => {
