@@ -10,15 +10,15 @@
 }
 
 .info-panel{
-  width:60%;
+  width:55%;
 }
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+
+.navigation-panel{
+  width:45%;
 }
 
 .App-header {
-  height: 150px;
+  height: 75px;
   padding: 20px;
 }
 

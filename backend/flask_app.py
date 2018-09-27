@@ -1,4 +1,5 @@
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, jsonify
+from flask_cors import CORS
 from pymongo import MongoClient
 
 import os
@@ -10,6 +11,7 @@ from spotipy.oauth2 import SpotifyOAuth
 Create the flask app
 '''
 app = Flask(__name__)
+CORS(app)
 
 '''
 Spotify instances
@@ -62,18 +64,18 @@ def authorize_success():
 
     # Get the token and cache it
     token_info = sp_oauth.get_access_token(access_code)
-
+    
     return "Authorization: Successful!"
 
 @app.route('/playlists')
 def get_playlists():
     token_info = sp_oauth.get_cached_token()
     access_token = token_info['access_token']
+
     spotify = spotipy.Spotify(auth=access_token)
     results = spotify.user_playlists(username)
-    for r in results['items']:
-        print(r['name'])
-    return str(results)
+    
+    return jsonify(results)
 
 @app.route('/insert_test')
 def insert_test():
