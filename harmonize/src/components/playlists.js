@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 const Playlists = ({playlists}) => {
     if (playlists)
         {
-            console.log('showing playlists')
             return (
             <div>
                 {
                     playlists.map(playlist => {
-                        return(<div key={playlist.id}> {playlist.name} </div>)
+                        return( 
+                            // <div key={playlist.id}> {playlist.name} </div> 
+                            <Playlist key={playlist.id} playlist={playlist} />
+                        )
                     })
                 }
             </div>
@@ -20,8 +22,10 @@ const Playlists = ({playlists}) => {
     }
 }
 
-const Playlist= ({}) => {
-    
+const Playlist= ({playlist}) => {
+    return(
+        <div> {playlist.name} </div>
+    )
 }
 
 const mapStateToProps = state => {
