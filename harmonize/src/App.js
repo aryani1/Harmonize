@@ -5,13 +5,22 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
-          <h1 className="App-title">Harmonize</h1>
-        </header>
-        <p className="App-intro">
-          Hello lmao
-        </p>
+        <div className="divider">
+          <div className="info-panel">
+
+          </div>
+
+          <div className="navigation-panel">
+            <header className="App-header">
+                <h1 className="App-title">Harmonize</h1>
+              </header>
+              <p className="App-intro">
+                Hello lmao
+              </p>
+          </div>
+
+        </div> 
+
       </div>
     );
 

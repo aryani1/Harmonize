@@ -20,7 +20,7 @@ username = 'bullenbygg1337'
 client_id = os.environ['CLIENT_ID']
 client_secret = os.environ['CLIENT_SECRET']
 redirect_uri='http://127.0.0.1:5000/authorize_success'
-scope='user-library-read'
+scope='user-library-read user-modify-playback-state'
 cache_path = ".cache-" + username
 
 sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, 
@@ -39,12 +39,8 @@ def hello_world():
 def search(name):
     return spotify.search(q='artist:' + name, type='artist')
 
-@app.route('/search_test')
-def search_test():
-    return search('Rebelion')
-
 @app.route('/authorize')
-def authorize(username='bullenbygg1337'):
+def authorize():
 
     token_info = sp_oauth.get_cached_token()
 
@@ -92,15 +88,6 @@ def play_song():
 '''
 Helper functions
 '''
-def send_request(req_fn, **kwargs):
-    # Get the access token which is required 
-    # to send requests
-    token_info   = sp_oauth.get_cached_token()
-    access_token = token_info['access_token']
-
-    spotify = spotipy.Spotify(auth=access_token)
-
-    results = spotify.req_fn(**kwargs)
 
 def get_spotify_lib():
     token_info   = sp_oauth.get_cached_token()
