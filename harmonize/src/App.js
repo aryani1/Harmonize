@@ -4,6 +4,7 @@ import { setPlaylists } from './reducers/playlists'
 
 import Playlists from './components/playlists'
 import Tracks from './components/tracks'
+import TrackInfo from './components/trackinfo'
 
 import './App.css';
 
@@ -27,7 +28,7 @@ class App extends Component {
         </header>
         <div className="divider">
           <div className="info-panel">
-
+            <TrackInfo />
           </div>
 
           <div className="navigation-panel">

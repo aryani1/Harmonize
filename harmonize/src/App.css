@@ -68,6 +68,16 @@
 .track{
   cursor:pointer;
 }
+.track-info{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin:10% 0 0 0;
+}
+.info-img{
+  height:300px;
+  width:300px;
+}
 
 .info-panel{
   height:100%;

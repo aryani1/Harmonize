@@ -105,6 +105,16 @@ def get_playlist(playlist_id):
     results = spotify.user_playlist_tracks(username, playlist_id)
 
     return jsonify(results)
+
+@app.route('/user/current_user')
+def get_current_user():
+    token_info = sp_oauth.get_cached_token()
+    access_token = token_info['access_token']
+
+    spotify = spotipy.Spotify(auth=access_token)
+    results = spotify.current_user()
+
+    return str(results)
     
 '''
 Helper functions
