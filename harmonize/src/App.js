@@ -26,7 +26,7 @@ class App extends Component {
         </header>
         <div className="divider">
           <div className="info-panel">
-
+            
           </div>
 
           <div className="navigation-panel">
