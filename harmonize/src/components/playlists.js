@@ -41,10 +41,8 @@ const fetchTracks = (playlist) => {
 
 // mapStateToProps and mapDispatchToProps
 const mapStateToProps = state => {
-    console.log(state)
     return {
         playlists: state.playlists.items,
-        tracks: state.tracks
     }
 }
 const mapDispatchToProps = dispatch => ({
