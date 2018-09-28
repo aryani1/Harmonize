@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { setPlaylists } from './reducers/playlists'
 
 import Playlists from './components/playlists'
+import Tracks from './components/tracks'
 
 import './App.css';
 
@@ -26,14 +27,19 @@ class App extends Component {
         </header>
         <div className="divider">
           <div className="info-panel">
-            
+
           </div>
 
           <div className="navigation-panel">
             <p className="App-intro">
               Playlists
-            </p>  
-            <Playlists />
+            </p>
+
+            <div className="feed">
+              <Playlists />
+              <Tracks />
+            </div>
+
           </div>
 
         </div> 
