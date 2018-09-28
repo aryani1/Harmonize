@@ -24,7 +24,9 @@ const Playlists = ({playlists, dispatch}) => {
 
 const Playlist= ({playlist, dispatch}) => {
     return(
-        <div key={playlist.id} className="playlist" onClick = { () => fetchTracks(playlist).then(tracks => dispatch(setTracks(tracks))) } >
+        <div key={playlist.id} className="playlist" onClick = { () => fetchTracks(playlist).then(tracks =>
+                                                                      dispatch(setTracks(tracks))
+                                                              )}>
             <img className="nav-img" src={playlist.images[0].url} height="60" width="60"/>
             <div>
                 {playlist.name}

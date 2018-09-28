@@ -38,7 +38,8 @@
 /*  */
 
 .feed{
-  
+  display:flex;
+  height:100%;
 }
 
 .playlist {
@@ -47,10 +48,27 @@
   align-items:center;
 }
 
+.playlist:hover{
+  cursor:pointer;
+  background-color: green;
+}
+
 .nav-img {
   padding-right:5%;
 }
 
-.info-panel{
+.tracks{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  text-align:left;
+  overflow: scroll;
+  height:20%;
+}
+.track{
+  cursor:pointer;
+}
 
+.info-panel{
+  height:100%;
 }

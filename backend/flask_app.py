@@ -64,7 +64,7 @@ def authorize_success():
     access_code = request.args.get('code', '')
 
     # Get the token and cache it
-    token_info = sp_oauth.get_access_token(access_code)
+    sp_oauth.get_access_token(access_code)
 
     return "Authorization: Successful!"
 
@@ -86,9 +86,14 @@ def insert_test():
 
 # Start playing
 @app.route('/play')
-def play_song():
+def play():
     get_spotify_lib().start_playback()
-    return "xd"
+    return "done!"
+
+@app.route('/play/<track_id>')
+def play_track(track_id):
+    get_spotify_lib().start_playback(uris=[track_id])
+    return "done!"
 
 # Get tracks from a playlist
 @app.route('/playlists/<playlist_id>')
