@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from "react-redux";
-import reducers from "./reducers/index.js";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+import reducers from "./reducers/index.js";
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setPlaylists } from './reducers/playlists'
 
+import { setPlaylists } from './reducers/playlists'
 import Playlists from './components/playlists'
 import Tracks from './components/tracks'
 import TrackInfo from './components/trackinfo'
@@ -13,6 +13,7 @@ const fetchPlaylists = () => {
     data.json()
   );
 };
+
 
 class App extends Component {
   componentDidMount() {
