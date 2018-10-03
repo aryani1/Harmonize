@@ -36,7 +36,7 @@ const Playlist= ({playlist, dispatch}) => {
 }
 
 const fetchTracks = (playlist) => {
-    return fetch("http://127.0.0.1:5000/playlists/" + playlist.id).then(data =>
+    return fetch("http://127.0.0.1:5000/playlists/" + playlist.id, {'credentials':'include'}).then(data =>
     data.json()
   );
 }

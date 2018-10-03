@@ -9,7 +9,7 @@ import TrackInfo from './components/trackinfo'
 import './App.css';
 
 const fetchPlaylists = () => {
-  return fetch("http://127.0.0.1:5000/playlists").then(data =>
+  return fetch("http://127.0.0.1:5000/playlists", {'credentials':'include'}).then(data =>
     data.json()
   );
 };

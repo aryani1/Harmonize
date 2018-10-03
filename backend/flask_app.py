@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, jsonify, make_response
+from flask import Flask, request, redirect, jsonify, make_response, session
 from flask_cors import CORS
 from pymongo import MongoClient
 from functools import wraps
@@ -13,7 +13,7 @@ from spotipy.oauth2 import SpotifyOAuth
 Create the flask app
 '''
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True)
 
 '''
 Spotify instances
@@ -25,11 +25,6 @@ client_id = os.environ['CLIENT_ID']
 client_secret = os.environ['CLIENT_SECRET']
 redirect_uri='http://127.0.0.1:5000/authorize_success'
 scope='user-library-read user-modify-playback-state'
-#cache_path = ".cache-" + username
-
-# sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, 
-#         scope=scope, cache_path=cache_path)
-
 
 '''
 Database
@@ -38,56 +33,86 @@ client = MongoClient('localhost', 27017)
 db = client['harmonize']
 
 '''
-Decorator function for authenticating and getting
+Decorator functions for authenticating and getting
 the access token before calling the function.
 '''
 def auth_process(func):
+    @wraps(func)
     def authorization_wrapper():
-        username = request.cookies.get('username')
-        if username:
-            print('Username exists!')
-            # Check aswell the DB and see if it matches
-            ##################
+        username   = request.cookies.get('username')
+        session_id = request.cookies.get('session_id')
+        if username and session_id:
+            stored_user = db.users.find({'_id':username})
+            if stored_user.count() < 1 or not is_matching_sessions(stored_user[0], request.cookies):
+                func(None)
         
-        print(username)
-        cache_path = 'cache-' + username
+        print('auth_process: authenticated ' + username)
+        cache_path = '.cache-' + username
 
         sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, 
         scope=scope, cache_path=cache_path)
-        func()
-        print('Authorization wrapper ran successfully!')
+        return func(sp_oauth)
     return authorization_wrapper
 
 # Return a spotify authorization token if it 
 # exists in the cache. Otherwise create a new
 # one.
+#
+# Returns auth_token
 def check_cache(func):
     @wraps(func)
     def save_and_cache_wrapper():
         username    = request.cookies.get('username')
         session_id  = request.cookies.get('session_id')
 
+        print(username)
+        print(session_id)
+
         if not username and not session_id:
+            print('check_cache: Username or session did not match')
             return func(None)
 
         stored_user = db.users.find({'_id':username})
         if stored_user.count() < 1 or not is_matching_sessions(stored_user[0], request.cookies):
             return func(None)
-        
+        print(stored_user[0]['_id'])
+        print('session matches!')
         cache_path = '.cache-' + username
         sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, 
                                 scope=scope, cache_path=cache_path)
         return func(sp_oauth)
     return save_and_cache_wrapper
 
+# Returns a spotify authorization token and the
+# username for a specific user. This decorator
+# assumes that the @check_cache decorator is used
+# before this one.
+#
+# Returns auth_token, username
+def get_username(func):
+    @wraps(func)
+    def username_wrapper(sp_oauth):
+        access_token = sp_oauth.get_cached_token()
+        access_token = access_token['access_token']
+
+        # Get the username of the user.
+        spotify = spotipy.Spotify(auth=access_token)
+        results = spotify.current_user()
+        user = results['id']
+
+        return func(sp_oauth, user)
+    return username_wrapper
+
+
 @app.route('/')
-def hello_world():
+@auth_process
+def hello_world(oauth):
     return 'Hello, World!'
 
 def search(name):
     return spotify.search(q='artist:' + name, type='artist')
 
-# Authorize a user 
+# Authorize a user
 @app.route('/authorize')
 @check_cache
 def authorize(sp_oauth):
@@ -101,6 +126,7 @@ def authorize(sp_oauth):
 
         auth_url = sp_oauth.get_authorize_url()
         return redirect(auth_url, code=200)
+
     print('authorize: user is already cached!')
     return "authorized"
 
@@ -154,7 +180,9 @@ def authorize_success():
 
 # Get playlists
 @app.route('/playlists')
-def get_playlists(sp_oauth):
+@check_cache
+@get_username
+def get_playlists(sp_oauth, username):
     token_info = sp_oauth.get_cached_token()
     access_token = token_info['access_token']
 
@@ -176,7 +204,7 @@ def play_track(track_id):
 
 # Get tracks from a playlist
 @app.route('/playlists/<playlist_id>')
-def get_playlist(playlist_id):
+def get_playlist(sp_oauth, playlist_id):
     token_info = sp_oauth.get_cached_token()
     access_token = token_info['access_token']
 
@@ -186,7 +214,7 @@ def get_playlist(playlist_id):
     return jsonify(results)
 
 @app.route('/user/current_user')
-def get_current_user():
+def get_current_user(sp_oauth):
     token_info = sp_oauth.get_cached_token()
     access_token = token_info['access_token']
 
@@ -205,8 +233,8 @@ def session():
 '''
 Helper functions
 '''
-
-def get_spotify_lib():
+@check_cache
+def get_spotify_lib(sp_oauth):
     token_info   = sp_oauth.get_cached_token()
     access_token = token_info['access_token']
 
