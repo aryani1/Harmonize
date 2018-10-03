@@ -34,7 +34,7 @@ const Track = ({track, dispatch}) => {
 
 const playTrack = (track) => {
     console.log('Play Track')
-    return fetch("http://127.0.0.1:5000/play/"+track.uri).then(_ =>
+    return fetch("http://127.0.0.1:5000/play/"+track.uri, {'credentials':'include'}).then(_ =>
     track
     );
 }

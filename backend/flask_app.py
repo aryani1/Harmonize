@@ -61,7 +61,7 @@ def auth_process(func):
 # Returns auth_token
 def check_cache(func):
     @wraps(func)
-    def save_and_cache_wrapper():
+    def save_and_cache_wrapper(**kwargs):
         username    = request.cookies.get('username')
         session_id  = request.cookies.get('session_id')
 
@@ -80,7 +80,7 @@ def check_cache(func):
         cache_path = '.cache-' + username
         sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, 
                                 scope=scope, cache_path=cache_path)
-        return func(sp_oauth)
+        return func(sp_oauth, **kwargs)
     return save_and_cache_wrapper
 
 # Returns a spotify authorization token and the
@@ -91,7 +91,7 @@ def check_cache(func):
 # Returns auth_token, username
 def get_username(func):
     @wraps(func)
-    def username_wrapper(sp_oauth):
+    def username_wrapper(sp_oauth, **kwargs):
         access_token = sp_oauth.get_cached_token()
         access_token = access_token['access_token']
 
@@ -100,7 +100,7 @@ def get_username(func):
         results = spotify.current_user()
         user = results['id']
 
-        return func(sp_oauth, user)
+        return func(sp_oauth, user, **kwargs)
     return username_wrapper
 
 
@@ -194,17 +194,19 @@ def get_playlists(sp_oauth, username):
 # Start playing
 @app.route('/play')
 def play():
-    get_spotify_lib().start_playback()
+    get_spotify_lib().start_playback() #pylint: disable=E1120
     return "done!"
 
 @app.route('/play/<track_id>')
 def play_track(track_id):
-    get_spotify_lib().start_playback(uris=[track_id])
+    get_spotify_lib().start_playback(uris=[track_id]) #pylint: disable=E1120
     return "done!"
 
 # Get tracks from a playlist
 @app.route('/playlists/<playlist_id>')
-def get_playlist(sp_oauth, playlist_id):
+@check_cache
+@get_username
+def get_playlist(sp_oauth, username, playlist_id):
     token_info = sp_oauth.get_cached_token()
     access_token = token_info['access_token']
 
@@ -222,13 +224,6 @@ def get_current_user(sp_oauth):
     results = spotify.current_user()
 
     return str(results)
-
-# TODO
-@app.route('/session')
-@auth_process
-def session():
-    print(request.cookies.get('lol'))
-    return 'done'
     
 '''
 Helper functions
