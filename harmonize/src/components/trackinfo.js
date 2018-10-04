@@ -13,10 +13,10 @@ const TrackInfo = ({track, dispatch}) => {
         }
     }
     return(
-        track ? 
+        track ?
         <div className="track-info">
             <img className="info-img" src={track.album.images[0].url}/>
-            <p>{track.name}</p>
+            <h2>{track.name}</h2>
             <p>{artists}</p>
         </div>
 

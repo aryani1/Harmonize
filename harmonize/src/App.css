@@ -1,11 +1,14 @@
 .App {
   text-align: center;
-  background-image:linear-gradient(black, #423f3e);
+  background-image:linear-gradient(#234B59, white);
   height:100%;
-  color:white
+  color: white;
+  font-family: Futura, sans-serif;
+  font-weight: 100;
 }
+
 .divider{
-  display:flex;
+  display: flex;
   margin: 0 5%;
 }
 
@@ -30,6 +33,12 @@
   font-size: large;
 }
 
+h2 {
+  font-size: 2em;
+  font-weight: 100;
+  color: #FF8181;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -44,13 +53,13 @@
 
 .playlist {
   display:flex;
-  padding: 10px 5px;
+  padding: 10px 10px;
   align-items:center;
 }
 
 .playlist:hover{
   cursor:pointer;
-  background-color: green;
+  background-color: #FF8181;
 }
 
 .nav-img {
