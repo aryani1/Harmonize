@@ -128,6 +128,9 @@ def authorize(sp_oauth):
                                 scope=scope, cache_path=None)
 
         auth_url = sp_oauth.get_authorize_url()
+        resp = redirect(auth_url)
+        resp.headers['Access-Control-Allow-Origin'] = "http://localhost:3000"
+        print(resp.headers)
         return redirect(auth_url, code=302)
 
     print('authorize: user is already cached!')
