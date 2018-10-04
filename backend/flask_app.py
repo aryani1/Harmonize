@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, jsonify, make_response, session
+from flask import Flask, request, redirect, jsonify, make_response, session, Blueprint
 from flask_cors import CORS
 from pymongo import MongoClient
 from functools import wraps
@@ -13,7 +13,7 @@ from spotipy.oauth2 import SpotifyOAuth
 Create the flask app
 '''
 app = Flask(__name__)
-CORS(app, supports_credentials=True)
+CORS(app, supports_credentials=True, origins='http://localhost:3000')
 
 '''
 Spotify instances
@@ -41,12 +41,14 @@ def auth_process(func):
     def authorization_wrapper():
         username   = request.cookies.get('username')
         session_id = request.cookies.get('session_id')
+
         if username and session_id:
+            print('wtf')
             stored_user = db.users.find({'_id':username})
             if stored_user.count() < 1 or not is_matching_sessions(stored_user[0], request.cookies):
                 func(None)
         
-        print('auth_process: authenticated ' + username)
+        print('auth_process: authenticated ')
         cache_path = '.cache-' + username
 
         sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, 
@@ -113,7 +115,7 @@ def search(name):
     return spotify.search(q='artist:' + name, type='artist')
 
 # Authorize a user
-@app.route('/authorize')
+@app.route('/authorize/')
 @check_cache
 def authorize(sp_oauth):
     # if sp_oauth:
@@ -121,11 +123,12 @@ def authorize(sp_oauth):
     #     access_token = token_info['access_token']
     #     return 'Authorized!'
     if not sp_oauth:
+        print('authorize: trying to authorize user')
         sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, 
                                 scope=scope, cache_path=None)
 
         auth_url = sp_oauth.get_authorize_url()
-        return redirect(auth_url, code=200)
+        return redirect(auth_url, code=302)
 
     print('authorize: user is already cached!')
     return "authorized"
@@ -199,7 +202,8 @@ def play():
 
 @app.route('/play/<track_id>')
 def play_track(track_id):
-    get_spotify_lib().start_playback(uris=[track_id]) #pylint: disable=E1120
+    #get_spotify_lib().start_playback(uris=[track_id]) #pylint: disable=E1120
+    set_users_track(get_user_list(None), track_id)
     return "done!"
 
 # Get tracks from a playlist
@@ -242,3 +246,32 @@ def is_matching_sessions(db_user, cookie):
     cookie_session = cookie.get('session_id')
 
     return db_session == cookie_session
+
+# Temporary file to get all the users
+# Fix this later!!!!
+def get_user_list(current_user):
+    user_list = []
+    for file in os.listdir():
+        if '.cache-' in file:
+            user_list.append(file[7:])
+    return user_list
+
+def set_users_track(user_list, track_id):
+    cache_path = '.cache-'
+    for user in user_list:
+        path = cache_path + user
+        sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, 
+                                scope=scope, cache_path=path)
+
+        token_info   = sp_oauth.get_cached_token()
+        access_token = token_info['access_token']
+
+        spotify = spotipy.Spotify(auth=access_token)
+        spotify.start_playback(uris=[track_id])
+    return "woho!"
+
+@app.route('/test')
+def test():
+    user_list = get_user_list('aurorabrun')
+    set_users_track(user_list, None)
+    return str(user_list)
