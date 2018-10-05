@@ -22,7 +22,6 @@ const Tracks = ({tracks, dispatch}) => {
 }
 
 const Track = ({track, dispatch}) => {
-    console.log(track)
     return(
         <div className="track" key={track.id} onClick={() => playTrack(track).then(track =>
                                                              dispatch(selectTrack(track))
@@ -33,7 +32,6 @@ const Track = ({track, dispatch}) => {
 }
 
 const playTrack = (track) => {
-    console.log('Play Track')
     return fetch("http://127.0.0.1:5000/play/"+track.uri, {'credentials':'include'}).then(_ =>
     track
     );
@@ -41,7 +39,6 @@ const playTrack = (track) => {
 
 // map stuff
 const mapStateToProps = state => {
-  console.log(state)
     return {
         tracks: state.tracks.items
     }
