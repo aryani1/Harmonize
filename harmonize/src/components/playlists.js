@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setTracks } from '../reducers/tracks'
+import Tracks from './tracks'
 
 // hei Aryan
 
@@ -8,7 +9,7 @@ const Playlists = ({playlists, dispatch}) => {
     if (playlists)
         {
             return (
-                <div>
+                <div className="list-feed">
                     {
                         playlists.map(playlist => {
                             return(
@@ -32,6 +33,9 @@ const Playlist= ({playlist, dispatch}) => {
             <img className="nav-img" src={playlist.images[0].url} height="60" width="60"/>
             <div>
                 {playlist.name}
+            </div>
+            <div>
+                <Tracks />
             </div>
         </div>
     )
