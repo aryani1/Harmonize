@@ -9,15 +9,16 @@
 
 .divider{
   display: flex;
+  flex-direction: column;
   margin: 0 5%;
 }
 
 .info-panel{
-  width:55%;
+  width:100%;
 }
 
 .navigation-panel{
-  width:45%;
+  width:100%;
 }
 
 .App-header {
@@ -31,12 +32,6 @@
 
 .App-intro {
   font-size: large;
-}
-
-h2 {
-  font-size: 2em;
-  font-weight: 100;
-  color: #FF8181;
 }
 
 @keyframes App-logo-spin {
@@ -77,15 +72,57 @@ h2 {
 .track{
   cursor:pointer;
 }
+
 .track-info{
   display:flex;
-  flex-direction:column;
+  flex-direction:row;
   align-items:center;
-  margin:10% 0 0 0;
+  margin: 6% 0 0 0;
 }
+
 .info-img{
   height:300px;
   width:300px;
+  position: flex;
+  margin-left: 3%;
+  z-index:1;
+}
+
+.name-info{
+  position:flex;
+  flex-direction:column;
+  width: 100%;
+}
+
+.track-name{
+  position: flex;
+  background-color: white;
+  width: 100%;
+  align-self: center;
+}
+
+h2 {
+  font-size: 2.4em;
+  font-weight: 100;
+  color: #FF8181;
+  text-align: left;
+  margin: 0px;
+  padding: 2% 3%;
+}
+
+.artist-name{
+  position: flex;
+  background-color: #FF8181;
+  align-self: center;
+  margin-left: 3%;
+}
+
+h3{
+  font-size: 1.6em;
+  font-weight: 100;
+  padding: 2% 3%;
+  text-align: left;
+  margin-top: 0;
 }
 
 .info-panel{
