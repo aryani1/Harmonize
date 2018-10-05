@@ -16,8 +16,14 @@ const TrackInfo = ({track, dispatch}) => {
         track ?
         <div className="track-info">
             <img className="info-img" src={track.album.images[0].url}/>
-            <h2>{track.name}</h2>
-            <p>{artists}</p>
+            <div className="name-info">
+              <div className="track-name">
+                  <h2>{track.name}</h2>
+              </div>
+              <div className="artist-name">
+                <h3>{artists}</h3>
+              </div>
+            </div>
         </div>
 
         :
