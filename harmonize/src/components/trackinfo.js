@@ -18,7 +18,7 @@ const TrackInfo = ({track, dispatch}) => {
             <img className="info-img" src={track.album.images[0].url}/>
             <div className="name-info">
               <div className="track-name">
-                  <h2>{track.name}</h2>
+                <h2>{track.name}</h2>
               </div>
               <div className="artist-name">
                 <h3>{artists}</h3>
