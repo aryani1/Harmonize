@@ -7,8 +7,8 @@ class Login extends React.Component {
     }
 
     spotifyLogin() {
-        fetch('http://127.0.0.1:5000/authorize/', {redirect: 'follow'}).then( data =>
-        console.log(data))
+        fetch('http://127.0.0.1:5000/authorize/').then( data =>
+        data)
     }
 
     componentDidMount() {
