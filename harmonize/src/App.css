@@ -8,18 +8,20 @@
   font-weight: 100;
 }
 
-.divider{
+/*.divider{
   display: flex;
   flex-direction: column;
   margin: 0 5%;
-}
+}*/
 
 .info-panel{
   width:100%;
+  min-height: 340px;
 }
 
 .navigation-panel{
-  width:100%;
+  width:96%;
+  margin: auto;
 }
 
 .App-header {
@@ -34,8 +36,8 @@
 .App-intro {
   font-size: large;
   text-align: left;
-  margin-top: 5%;
-  
+  margin-top: 20px;
+
 }
 
 @keyframes App-logo-spin {
@@ -94,7 +96,8 @@
   display:flex;
   flex-direction:row;
   align-items:center;
-  margin: 0 0 0 0;
+  margin: 0;
+  padding: 20px 0;
 }
 
 .info-img{
@@ -102,6 +105,7 @@
   width:300px;
   position: flex;
   z-index:1;
+  margin-left: 2%;
 }
 
 .name-info{
