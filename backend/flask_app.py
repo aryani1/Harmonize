@@ -219,7 +219,7 @@ def get_playlist(sp_oauth, username, playlist_id):
     access_token = token_info['access_token']
 
     spotify = spotipy.Spotify(auth=access_token)
-    results = spotify.user_playlist_tracks(username, playlist_id)
+    results = spotify.user_playlist_tracks(username, playlist_id, limit=10)
 
     return jsonify(results)
 

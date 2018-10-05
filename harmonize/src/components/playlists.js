@@ -43,6 +43,36 @@ const Playlist= ({playlist, dispatch}) => {
     )
 }
 
+class PlaylistComponent extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {playlist: props.playlist, tracks:[]}
+    }
+
+    componentDidMount(){
+        fetchTracks(this.state.playlist).then(tracks => {
+            // tracks.items is an array of all the tracks for a playlist
+            this.updateTracks(tracks.items)
+        })
+    }
+
+    updateTracks(tracks){
+        this.setState({
+            tracks: tracks
+        })
+        console.log(this.state)
+    }
+
+    render() {
+        return(
+             <div>
+             <p>{this.state.playlist.name}</p>
+             </div>
+        )
+    }
+
+}
+
 const fetchTracks = (playlist) => {
     return fetch("http://127.0.0.1:5000/playlists/" + playlist.id, {'credentials':'include'}).then(data =>
     data.json()
@@ -52,7 +82,7 @@ const fetchTracks = (playlist) => {
 // mapStateToProps and mapDispatchToProps
 const mapStateToProps = state => {
     return {
-        playlists: state.playlists.items,
+        playlists: state.playlists.items
     }
 }
 const mapDispatchToProps = dispatch => ({
