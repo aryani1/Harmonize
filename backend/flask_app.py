@@ -279,12 +279,3 @@ def test():
     user_list = get_user_list('aurorabrun')
     set_users_track(user_list, None)
     return str(user_list)
-
-# # cors test
-# @app.after_request
-# def add_cors_headers(response):
-#     white = ['http://localhost:3000','https://accounts.spotify.com']
-#     r = request.referrer[:-1]
-#     if r in white:
-#         response.headers.add('Access-Control-Allow-Origin', r)
-#     return response
