@@ -129,9 +129,9 @@ def authorize(sp_oauth):
 
         auth_url = sp_oauth.get_authorize_url()
         resp = redirect(auth_url)
-        resp.headers['Access-Control-Allow-Origin'] = "http://localhost:3000"
+        resp.headers['Access-Control-Allow-Origin'] = "https://accounts.spotify.com"
         print(resp.headers)
-        return redirect(auth_url, code=302)
+        return redirect(auth_url, code=200)
 
     print('authorize: user is already cached!')
     return "authorized"
@@ -139,6 +139,7 @@ def authorize(sp_oauth):
 # Get and cache access token
 @app.route('/authorize_success')
 def authorize_success():
+    print('SUCCCCCEEEESSSSSSSSSS')
     cache_string = '.cache-'
     temp_filename = uuid.uuid4().hex
     access_code = request.args.get('code', '')
@@ -278,3 +279,12 @@ def test():
     user_list = get_user_list('aurorabrun')
     set_users_track(user_list, None)
     return str(user_list)
+
+# # cors test
+# @app.after_request
+# def add_cors_headers(response):
+#     white = ['http://localhost:3000','https://accounts.spotify.com']
+#     r = request.referrer[:-1]
+#     if r in white:
+#         response.headers.add('Access-Control-Allow-Origin', r)
+#     return response
