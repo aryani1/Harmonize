@@ -5,10 +5,10 @@ import { selectTrack } from '../reducers/currentTrack'
 const Tracks = ({tracks, dispatch}) => {
         // console.log(tracks)
         return(
-            tracks ? 
+            tracks ?
             <div className="tracks">
                 {
-                    tracks.map(track_info => 
+                    tracks.map(track_info =>
                         {
                             return <Track key={track_info.track.id} track={track_info.track} dispatch={dispatch}/>
                         })
@@ -41,6 +41,7 @@ const playTrack = (track) => {
 
 // map stuff
 const mapStateToProps = state => {
+  console.log(state)
     return {
         tracks: state.tracks.items
     }
