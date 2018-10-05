@@ -30,10 +30,12 @@ const Playlist= ({playlist, dispatch}) => {
         <div key={playlist.id} className="playlist" onClick = { () => fetchTracks(playlist).then(tracks =>
                                                                       dispatch(setTracks(tracks))
                                                               )}>
-              <img className="nav-img" src={playlist.images[0].url} height="60" width="60"/>
-              <div>
-                  {playlist.name}
-              </div>
+            <div className="playlist-titlecard">
+                <img className="nav-img" src={playlist.images[0].url} height="60" width="60"/>
+                <div className="playlist-name" >
+                    {playlist.name}
+                </div>
+            </div>
             <div>
                 <Tracks />
             </div>

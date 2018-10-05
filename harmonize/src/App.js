@@ -34,7 +34,7 @@ class App extends Component {
 
           <div className="navigation-panel">
             <p className="App-intro">
-              Playlists
+              Your Playlists
             </p>
 
             <div className="feed">
