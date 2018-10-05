@@ -2,8 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { selectTrack } from '../reducers/currentTrack'
 
-const Tracks = ({tracks, dispatch}) => {
-        // console.log(tracks)
+const Tracks = props => {
+        console.log(props)
+        let tracks = props.tracks
+        let dispatch = props.dispatch
         return(
             tracks ?
             <div className="tracks">
@@ -46,4 +48,4 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
     dispatch
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Tracks);
+export default connect(null, mapDispatchToProps)(Tracks);

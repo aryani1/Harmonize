@@ -39,7 +39,7 @@ class App extends Component {
 
             <div className="feed">
               <Playlists />
-              <Tracks />
+              {/* <Tracks /> */}
             </div>
 
           </div>

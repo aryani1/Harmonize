@@ -13,7 +13,7 @@ const Playlists = ({playlists, dispatch}) => {
                     {
                         playlists.map(playlist => {
                             return(
-                                <Playlist key={playlist.id} playlist={playlist} dispatch={dispatch}/>
+                                <PlaylistComponent key={playlist.id} playlist={playlist} dispatch={dispatch}/>
                             )
                         })
                     }
@@ -64,10 +64,19 @@ class PlaylistComponent extends React.Component {
     }
 
     render() {
+        console.log(this.state)
         return(
-             <div>
-             <p>{this.state.playlist.name}</p>
-             </div>
+        <div key={this.state.playlist.id} className="playlist" >
+            <div className="playlist-titlecard">
+                <img className="nav-img" src={this.state.playlist.images[0].url} height="60" width="60"/>
+                <div className="playlist-name" >
+                    {this.state.playlist.name}
+                </div>
+            </div>
+            <div>
+                <Tracks tracks={this.state.tracks} />
+            </div>
+        </div>
         )
     }
 
