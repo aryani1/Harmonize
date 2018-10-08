@@ -23,11 +23,12 @@ class App extends Component {
 
   render() {
     return (
+
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Harmonize</h1>
+          <p className="App-title">Harmonize</p>
         </header>
-        <div className="divider">
+
           <div className="info-panel">
             <TrackInfo />
           </div>
@@ -43,8 +44,6 @@ class App extends Component {
             </div>
 
           </div>
-
-        </div>
 
       </div>
     );

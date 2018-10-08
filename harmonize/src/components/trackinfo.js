@@ -15,14 +15,18 @@ const TrackInfo = ({track, dispatch}) => {
     return(
         track ?
         <div className="track-info">
-            <img className="info-img" src={track.album.images[0].url}/>
-            <div className="name-info">
-              <div className="track-name">
-                <h2>{track.name}</h2>
-              </div>
-              <div className="artist-name">
-                <h3>{artists}</h3>
-              </div>
+            <div className="track-info-header">
+                <div class="info-img duotone">
+                    <img src={track.album.images[0].url}/>
+                </div>
+            </div>
+            <div className="track-info-name">
+                <div className="track-name">
+                  <h2>{track.name}</h2>
+                </div>
+                <div className="artist-name">
+                  <h3>{artists}</h3>
+                </div>
             </div>
         </div>
 
