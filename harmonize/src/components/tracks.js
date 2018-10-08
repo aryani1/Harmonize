@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { selectTrack } from '../reducers/currentTrack'
 
 const Tracks = props => {
-        console.log(props)
         let tracks = props.tracks
         let dispatch = props.dispatch
         return(

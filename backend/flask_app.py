@@ -4,6 +4,7 @@ from pymongo import MongoClient
 from functools import wraps
 
 import os
+import time
 import uuid
 import spotipy
 import spotipy.util as util
@@ -13,7 +14,7 @@ from spotipy.oauth2 import SpotifyOAuth
 Create the flask app
 '''
 app = Flask(__name__)
-CORS(app, supports_credentials=True, origins='http://localhost:3000')
+CORS(app, supports_credentials=True)
 
 '''
 Spotify instances
@@ -24,7 +25,7 @@ spotify = spotipy.Spotify()
 client_id = os.environ['CLIENT_ID']
 client_secret = os.environ['CLIENT_SECRET']
 redirect_uri='http://127.0.0.1:5000/authorize_success'
-scope='user-library-read user-modify-playback-state'
+scope='user-library-read user-modify-playback-state user-modify-playback-state'
 
 '''
 Database
@@ -127,11 +128,11 @@ def authorize(sp_oauth):
         sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, 
                                 scope=scope, cache_path=None)
 
-        auth_url = sp_oauth.get_authorize_url()
+        auth_url = sp_oauth.get_authorize_url(show_dialog=True)
         resp = redirect(auth_url)
         resp.headers['Access-Control-Allow-Origin'] = "https://accounts.spotify.com"
         print(resp.headers)
-        return redirect(auth_url, code=200)
+        return redirect(auth_url, code=302)
 
     print('authorize: user is already cached!')
     return "authorized"
@@ -262,6 +263,7 @@ def get_user_list(current_user):
 
 def set_users_track(user_list, track_id):
     cache_path = '.cache-'
+    user_reqs  = []
     for user in user_list:
         path = cache_path + user
         sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, 
@@ -271,7 +273,15 @@ def set_users_track(user_list, track_id):
         access_token = token_info['access_token']
 
         spotify = spotipy.Spotify(auth=access_token)
-        spotify.start_playback(uris=[track_id])
+        user_reqs.append(spotify)
+
+    prev_time = 0
+    for u in user_reqs:
+        start_time = time.time()
+        u.start_playback(uris=[track_id])
+        u.seek_track(prev_time)
+        prev_time = (time.time() - start_time) * 1000
+
     return "woho!"
 
 @app.route('/test')
