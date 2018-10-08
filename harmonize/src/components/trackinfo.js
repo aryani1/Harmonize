@@ -42,7 +42,6 @@ const get_artists = (a, b) => a.name + ', ' + b.name
 
 // mapStateToProps and mapDispatchToProps
 const mapStateToProps = state => {
-    console.log(state)
     return {
         track: state.currentTrack,
     }

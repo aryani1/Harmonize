@@ -59,11 +59,9 @@ class PlaylistComponent extends React.Component {
         this.setState({
             tracks: tracks
         })
-        console.log(this.state)
     }
 
     render() {
-        console.log(this.state)
         return(
         <div key={this.state.playlist.id} className="playlist" >
             <div className="playlist-titlecard">

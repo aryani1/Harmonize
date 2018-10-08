@@ -5,7 +5,6 @@ import { FaMusic } from 'react-icons/fa';
 import { FaPlay } from 'react-icons/fa';
 
 const Tracks = props => {
-        console.log(props)
         let tracks = props.tracks
         let dispatch = props.dispatch
         return(
