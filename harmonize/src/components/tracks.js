@@ -40,6 +40,7 @@ const playTrack = (track) => {
 
 // map stuff
 const mapStateToProps = state => {
+    console.log(state)
     return {
         tracks: state.tracks.items
     }
