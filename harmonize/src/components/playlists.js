@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { setTracks } from '../reducers/tracks'
 import Tracks from './tracks'
 
-// hei Aryan
 
 const Playlists = ({playlists, dispatch}) => {
     if (playlists)
@@ -91,7 +90,8 @@ const fetchTracks = (playlist) => {
 // mapStateToProps and mapDispatchToProps
 const mapStateToProps = state => {
     return {
-        playlists: state.playlists.items
+        playlists: state.playlists.items,
+        currentTrack: state.currentTrack
     }
 }
 const mapDispatchToProps = dispatch => ({

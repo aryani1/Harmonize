@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectTrack } from '../reducers/currentTrack'
+import { selectTrack } from '../reducers/currentTrack';
+import { FaMusic } from 'react-icons/fa';
+import { FaPlay } from 'react-icons/fa';
 
 const Tracks = props => {
         console.log(props)
@@ -25,10 +27,11 @@ const Tracks = props => {
 
 const Track = ({track, dispatch}) => {
     return(
+
         <div className="track" key={track.id} onClick={() => playTrack(track).then(track =>
                                                              dispatch(selectTrack(track))
                                                       )}>
-            {track.name}
+            <p className="note"> <FaMusic/> </p> {track.name}
         </div>
     );
 }
@@ -41,8 +44,10 @@ const playTrack = (track) => {
 
 // map stuff
 const mapStateToProps = state => {
+    console.log(state);
     return {
-        tracks: state.tracks.items
+        tracks: state.tracks.items,
+        currentTrack: state.currentTrack
     }
 }
 const mapDispatchToProps = dispatch => ({

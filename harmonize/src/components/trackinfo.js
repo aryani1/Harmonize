@@ -16,7 +16,7 @@ const TrackInfo = ({track, dispatch}) => {
         track ?
         <div className="track-info">
             <div className="track-info-header">
-                <div class="info-img duotone">
+                <div className="info-img duotone">
                     <img src={track.album.images[0].url}/>
                 </div>
             </div>
