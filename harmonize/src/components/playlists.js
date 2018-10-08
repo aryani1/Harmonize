@@ -65,7 +65,9 @@ class PlaylistComponent extends React.Component {
         return(
         <div key={this.state.playlist.id} className="playlist" >
             <div className="playlist-titlecard">
-                <img className="nav-img" src={this.state.playlist.images[0].url} height="60" width="60"/>
+                <div className="nav-img nav-duotone">
+                    <img src={this.state.playlist.images[0].url}/>
+                </div>
                 <div className="playlist-name" >
                     {this.state.playlist.name}
                 </div>

@@ -8,11 +8,13 @@
 }
 
 :root {
+
   --dark:rgba(0, 8, 118, 1);
   --light:#FCF8BB;
   --dark-grad:rgba(0, 0, 150, .8);
   --med-grad:rgba(229, 205, 185, .5);
   --light-grad:rgba(240, 240, 0, 1);
+
 }
 
 .navigation-panel{
@@ -26,7 +28,7 @@
   width: 80%;
   position: absolute;
   left: 10%;
-  background-color: var(--dark);
+  background-color: rgba(0, 8, 118, 1);
   z-index: 1;
 }
 
@@ -83,18 +85,45 @@
 }
 
 .playlist-titlecard{
-  display: flex;
-  text-align: left;
-  width: 100px;
+  display: block;
 }
 
 .playlist-name{
   font-size: 1em;
+  text-align: left;
 }
 
 .nav-img {
-  padding-right:5%;
+  width: 50%;
+  height: 50%;
 }
+
+.nav-img img{
+  width:100%;
+  height:100%;
+}
+
+.nav-img::after{
+  content: '';
+  width: 100%;
+  height: 100%;
+}
+
+.nav-duotone {
+  background: linear-gradient(180deg, var(--light-grad), var(--med-grad));
+}
+
+.nav-duotone img{
+  mix-blend-mode: multiply;
+  -webkit-filter: grayscale(100%) contrast(1);
+  filter: grayscale(100%) contrast(1);
+}
+
+.nav-duotone::after{
+  background:linear-gradient(180deg, var(--med-grad), var(--dark-grad));
+  mix-blend-mode: lighten;
+}
+
 
 .tracks{
   display:block;
@@ -208,7 +237,6 @@ h2 {
   position: relative;
   left: 0%;
   width: 100%;
-  /*background: linear-gradient(180deg, rgba(230, 230, 185, 1), white);*/
   background-color: var(--light);
 }
 
