@@ -1,6 +1,9 @@
+
+
+/**/        MOBILE FIRST!!!         */
+
 .App {
-  text-align: center;
-/*background-image:linear-gradient(#234B59, white); */
+  text-align: left;
   background-color: #fff);
   height:100%;
   color: var(--dark);
@@ -17,136 +20,25 @@
 
 }
 
-.navigation-panel{
-  width:90%;
-  margin: auto;
-}
-
 .App-header {
-  height: 40px;
-  padding: 0;
-  width: 80%;
-  position: absolute;
-  left: 10%;
-  background-color: rgba(0, 8, 118, 1);
-  z-index: 1;
+ height: 36px;
+ width: 240px;
+ position: absolute;
+ left: 50%;
+ margin-left: -120px;
+ z-index: 2;
+ background-color: var(--dark);
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 1em;
   text-transform: uppercase;
-  font-weight: lighter;
   letter-spacing: 10px;
   color: var(--light);
-  padding:0px;
+  padding: 1% 0 1% 1%;
   margin: 2%;
-
+  text-align: center;
 }
-
-.App-intro {
-  font-size: large;
-  text-align: left;
-  margin-top: 20px;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/*  */
-
-.feed{
-  display:flex;
-  height:100%;
-  flex-direction: row;
-}
-
-.list-feed{
-  display: flex;
-  flex-direction: row;
-  overflow: scroll;
-}
-
-.playlist {
-  display:flex;
-  padding: 1em;
-  flex-direction: column;
-  flex: 0 0 60%;
-  background-color: white;
-  color: var(--dark);
-}
-
-.playlist:hover{
-  cursor:pointer;
-  background-color: var(--light);
-  color: var(--dark);
-
-}
-
-.playlist-titlecard{
-  display: block;
-}
-
-.playlist-name{
-  font-size: 1em;
-  text-align: left;
-}
-
-.nav-img {
-  width: 50%;
-  height: 50%;
-}
-
-.nav-img img{
-  width:100%;
-  height:100%;
-}
-
-.nav-img::after{
-  content: '';
-  width: 100%;
-  height: 100%;
-}
-
-.nav-duotone {
-  background: linear-gradient(180deg, var(--light-grad), var(--med-grad));
-}
-
-.nav-duotone img{
-  mix-blend-mode: multiply;
-  -webkit-filter: grayscale(100%) contrast(1);
-  filter: grayscale(100%) contrast(1);
-}
-
-.nav-duotone::after{
-  background:linear-gradient(180deg, var(--med-grad), var(--dark-grad));
-  mix-blend-mode: lighten;
-}
-
-
-.tracks{
-  display:block;
-  text-align:left;
-  margin-top: 1em;
-  height: 60%;
-  width: 200px;
-}
-
-.track{
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-bottom: 10px;
-}
-
-.note {
-  display: inline;
-  padding: 10px;
-  font-size: .7em;
-}
-
 
 /* Info header Current Track */
 
@@ -158,9 +50,10 @@
 }
 
 .track-info-header{
-  height: 100%;
   position:relative;
   padding: 50% 0;
+  width: 100%;
+  margin-left: 0;
 }
 
 /* DUOTONE IMAGE*/
@@ -168,83 +61,444 @@
 .info-img {
   position: absolute;
   top: 0;
-  bottom: 0;
-  left: 0%;
-  right: 0;
   height: 100%;
   width:100%;
-  /*box-shadow: 0px 2px 2px #000038;*/
 }
 
 .info-img img{
-  width: 100%;
-  height: 100%;
+ width: 100%;
+ height: 100%;
 }
 
 .info-img::after{
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+ content: '';
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ top: 0;
+ left: 0;
 }
 
 .duotone {
-  background: linear-gradient(180deg, var(--light-grad), var(--med-grad));
+ background: linear-gradient(180deg, var(--light-grad), var(--med-grad));
 }
 
 .duotone img{
-  mix-blend-mode: multiply;
-  -webkit-filter: grayscale(100%) contrast(3);
-  filter: grayscale(100%) contrast(3);
+ mix-blend-mode: multiply;
+ -webkit-filter: grayscale(100%) contrast(3);
+ filter: grayscale(100%) contrast(3);
 }
 
 .duotone::after{
-  background: linear-gradient(180deg, var(--med-grad), var(--dark-grad));
-  mix-blend-mode: lighten;
+ background: linear-gradient(180deg, var(--med-grad), var(--dark-grad));
+ mix-blend-mode: lighten;
 }
 
 /* TRACKNAME */
 
 .track-info-name{
-  height:100%;
-  position: relative;
+ position:relative;
+ width: 100%;
+ margin-left: 0;
+ padding: 0;
+
 }
 
 .track-name{
-  position: relative;
-  top: 0;
-  margin: 0% 0%;
-  background-color: var(--dark);
-  width: 100%;
-  z-index: 3;
-  /*filter: drop-shadow(0 2px 6px #111);*/
+ position: relative;
+ top: 0;
+ margin: 0% 0%;
+ background-color: var(--dark);
+ width: 100%;
+ z-index: 3;
 }
 
 h2 {
-  font-size: 1em;
-  font-weight: 800;
-  color: #fff;
-  text-align: left;
-  margin: 0px;
-  padding: 2% 3%;
-  text-transform: uppercase;
-  letter-spacing: 6px;
+ font-size: 1em;
+ font-weight: 800;
+ color: #fff;
+ text-align: left;
+ margin: 0px;
+ padding: 2% 4%;
+ text-transform: uppercase;
+ letter-spacing: 6px;
 }
 
 .artist-name{
-  position: relative;
-  left: 0%;
-  width: 100%;
-  background-color: var(--light);
+ position: relative;
+ top: 0;
+ left: 0;
+ width: 100%;
+ background-color: var(--light);
 }
 
 h3{
+ font-size: 1em;
+ font-weight: 100;
+ padding: 2% 0% 3% 4%;
+ text-align: left;
+ margin: 0px;
+ color: rgba(0, 8, 118, 1);
+}
+
+.navigation-panel{
+  width:90%;
+  margin: auto;
+  position:relative;
+}
+
+
+.App-intro {
+ font-size: 1em;
+ color: var(--dark);
+ text-align: left;
+ margin-top: 20px;
+}
+
+.feed{
+ display:flex;
+ height:100%;
+ flex-direction: row;
+}
+
+.list-feed{
+ display: flex;
+ flex-direction: row;
+ overflow: scroll;
+}
+
+.playlist {
+ display:flex;
+ padding: 1em;
+ flex-direction: column;
+ flex: 0 0 60%;
+ background-color: white;
+ color: var(--dark);
+}
+
+.playlist:hover{
+ cursor:pointer;
+ background-color: var(--light);
+ color: var(--dark);
+
+}
+
+.playlist-titlecard{
+ position: relative;
+}
+
+.nav-img {
+ width: 80px;
+ height: 80px;
+
+}
+
+.nav-img img{
+ width:100%;
+ height:100%;
+}
+
+.nav-img::after{
+ content: " ";
+ width:80px;
+ height:80px;
+ position:relative;
+ top: -80px;
+ left: 0px;
+ z-index: 4;
+ display: block;
+}
+
+.nav-duotone {
+ background: linear-gradient(180deg, var(--light-grad), var(--med-grad));
+}
+
+.nav-duotone img{
+ mix-blend-mode: multiply;
+ -webkit-filter: grayscale(100%) contrast(1);
+ filter: grayscale(100%) contrast(1);
+}
+
+.nav-duotone::after{
+ background:linear-gradient(180deg, var(--med-grad), var(--dark-grad));
+ mix-blend-mode: lighten;
+}
+
+.playlist-name{
+  position: absolute;
+  top: 10%;
   font-size: 1em;
-  font-weight: 100;
-  padding: 2% 0% 3% 4%;
+  margin-left: 5%;
+  padding: 2%;
+  width:80%;
   text-align: left;
-  margin: 0px;
-  color: rgba(0, 8, 118, 1);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: white;
+  background-color: var(--dark);
+  z-index: 4;
+}
+
+.tracks{
+ display:block;
+ text-align:left;
+ margin-top: 1em;
+ height: 60%;
+ width: 200px;
+}
+
+.track{
+ cursor: pointer;
+ white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ padding-bottom: 10px;
+}
+
+.note {
+ display: inline;
+ padding: 10px;
+ font-size: .7em;
+}
+
+
+
+@media all and (min-width: 900px) {
+
+  .App-header {
+    height: 48px;
+    width: 20%;
+    margin-left:0;
+    left: 5%;
+  }
+
+  .App-title {
+    font-size: 1.2em;
+  }
+
+  .App-intro {
+    font-size: large;
+    text-align: left;
+    margin-top: 20px;
+  }
+
+
+  /* Info header Current Track */
+
+  .info-panel{
+    max-height: 600px;
+  }
+
+/* DUOTONE IMAGE*/
+
+  .track-info-header{
+    position: absolute;
+    padding: 0;
+    width: 50%;
+    margin-left: 5%;
+    height: 0;
+  }
+
+  .info-img {
+    position: absolute;
+    top: 20%;
+    height: 40%;
+    width: 40%;
+    z-index: 1;
+  }
+
+  /* continued duotone image */
+  .info-img img{
+    width: 100%;
+    height: 100%;
+  }
+
+  .info-img::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .duotone {
+    background: linear-gradient(180deg, var(--light-grad), var(--med-grad));
+  }
+
+  .duotone img{
+    mix-blend-mode: multiply;
+    -webkit-filter: grayscale(100%) contrast(3);
+    filter: grayscale(100%) contrast(3);
+  }
+
+  .duotone::after{
+    background: linear-gradient(180deg, var(--med-grad), var(--dark-grad));
+    mix-blend-mode: lighten;
+  }
+
+  .track-info-header{
+    position: absolute;
+    padding-top: 50%;
+    width: 50%;
+    margin-left: 5%;
+  }
+
+  /* TRACKINFO */
+
+  .track-info-name{
+    width: 100%;
+    position: relative;
+    padding-top: 50%;
+    margin-left: 0;
+  }
+
+  .track-name{
+    position: absolute;
+    background-color: var(--dark);
+    width: 100%;
+    z-index: 0;
+    top: 34%;
+    height: 7%;
+  }
+
+  h2 {
+    font-size: 1.2vw;
+    font-weight: 800;
+    color: #fff;
+    text-align: left;
+    padding: 1.2% 28%;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+  }
+
+  .artist-name{
+    position: absolute;
+    width: 100%;
+    background-color: var(--light);
+    height: 5%;
+    top: 41%;
+  }
+
+  h3 {
+    font-size: 1vw;
+    font-weight: 100;
+    padding: .6% 0% .7% 28%;
+    text-align: left;
+    margin: 0px;
+    color: rgba(0, 8, 118, 1);
+  }
+
+  /*---------------------------------------------*/
+
+
+
+  .App-intro {
+    font-size: large;
+    text-align: left;
+  }
+
+  /*  */
+
+  .feed{
+    display:flex;
+    height:100%;
+    flex-direction: row;
+  }
+
+  .list-feed{
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+  }
+
+  .playlist {
+    display:flex;
+    padding: 1em;
+    flex-direction: column;
+    flex: 0 0 60%;
+    background-color: white;
+    color: var(--dark);
+  }
+
+  .playlist:hover{
+    cursor:pointer;
+    background-color: var(--light);
+    color: var(--dark);
+
+  }
+
+  .playlist-titlecard{
+    position: relative;
+  }
+
+  .nav-img {
+    width: 80px;
+    height: 80px;
+
+  }
+
+  .nav-img img{
+    width:100%;
+    height:100%;
+  }
+
+  .nav-img::after{
+    content: " ";
+    width:80px;
+    height:80px;
+    position:relative;
+    top: -80px;
+    left: 0px;
+    z-index: 4;
+    display: block;
+  }
+
+  .nav-duotone {
+    background: linear-gradient(180deg, var(--light-grad), var(--med-grad));
+  }
+
+  .nav-duotone img{
+    mix-blend-mode: multiply;
+    -webkit-filter: grayscale(100%) contrast(1);
+    filter: grayscale(100%) contrast(1);
+  }
+
+  .nav-duotone::after{
+    background:linear-gradient(180deg, var(--med-grad), var(--dark-grad));
+    mix-blend-mode: lighten;
+  }
+
+  .playlist-name{
+    font-size: 1em;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    position: absolute;
+    top: 50%;
+    background-color: white;
+    z-index: 1;
+  }
+
+  .tracks{
+    display:block;
+    text-align:left;
+    margin-top: 1em;
+    height: 60%;
+    width: 200px;
+  }
+
+  .track{
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-bottom: 10px;
+  }
+
+  .note {
+    display: inline;
+    padding: 10px;
+    font-size: .7em;
+  }
 }
