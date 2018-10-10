@@ -28,10 +28,11 @@ const Tracks = props => {
 }
 
 const Track = ({track, handlePlayTrack, currentTrack}) => {
+  const isCurrent = currentTrack && (currentTrack.id == track.id)
     return(
-        <div className="track" key={track.id} onClick={() => handlePlayTrack(track)}>
-           {currentTrack && (currentTrack.id == track.id) ?
-           (<p className="note"> <FaPlay/> </p>)
+        <div className={"track " + (isCurrent ? 'currentTrack' : '') } key={track.id} onClick={() => handlePlayTrack(track)}>
+           { isCurrent ?
+           (<p className="current-track"> <FaPlay/> </p>)
            :
             (<p className="note"> <FaMusic/> </p>)
            } {track.name}
