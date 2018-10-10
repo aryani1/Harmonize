@@ -5,6 +5,7 @@ import { setPlaylists } from './reducers/playlists'
 import Playlists from './components/playlists'
 import Tracks from './components/tracks'
 import TrackInfo from './components/trackinfo'
+import TrackQueue from './components/trackQueue'
 
 import './App.css';
 
@@ -39,7 +40,9 @@ class App extends Component {
               Queue
             </p>
 
-            <div className="queue-panel"></div>
+            <div className="queue-panel">
+              <TrackQueue />
+            </div>
 
             <p className="playlist-nav">
               Your Playlists

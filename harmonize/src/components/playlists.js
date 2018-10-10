@@ -93,7 +93,8 @@ const mapStateToProps = state => {
   console.log(state);
   return {
     playlists: state.playlists.items,
-    currentTrack: state.currentTrack
+    currentTrack: state.currentTrack,
+    queue: state.queue
   };
 };
 const mapDispatchToProps = dispatch => ({
