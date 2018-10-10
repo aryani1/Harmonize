@@ -211,7 +211,7 @@ def play_track(track_id):
     #get_spotify_lib().start_playback(uris=[track_id]) #pylint: disable=E1120
     decoded_tracks = request.data.decode("utf-8")
     decoded_tracks = json.loads(decoded_tracks)
-    set_users_track(get_user_list(None), decoded_tracks)
+    set_users_track(get_user_list(None), track_id, decoded_tracks)
     return "done!"
 
 # Get tracks from a playlist
@@ -264,7 +264,7 @@ def get_user_list(current_user):
             user_list.append(file[7:])
     return user_list
 
-def set_users_track(user_list, track_id):
+def set_users_track(user_list, track_id, track_list):
     cache_path = '.cache-'
     user_reqs  = []
     for user in user_list:
@@ -281,7 +281,7 @@ def set_users_track(user_list, track_id):
     prev_time = 0
     for u in user_reqs:
         start_time = time.time()
-        u.start_playback(uris=track_id)
+        u.start_playback(uris=track_list, offset={'uri': track_id})
         u.seek_track(prev_time)
         prev_time = (time.time() - start_time) * 1000
 
