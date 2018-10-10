@@ -19,7 +19,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "prettier": "prettier --write src/**/playlists.{js,css}"
+    "prettier": "prettier --write src/**/playlists.{js,css}",
+    "prettier-js": "prettier --write src/**/*.js"
   },
   "devDependencies": {
     "prettier": "1.14.3"

@@ -8,7 +8,7 @@ export const selectTrack = track => ({
 const currentTrackReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SELECT_TRACK":
-      return Object.assign({}, state, action.track)
+      return Object.assign({}, state, action.track);
     default:
       return state;
   }
