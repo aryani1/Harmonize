@@ -12,11 +12,22 @@
 
 :root {
 
-  --dark:rgba(0, 8, 118, 1);
-  --light:#FCF8BB;
-  --dark-grad:rgba(0, 0, 150, .8);
+/*  --dark:rgba(0, 8, 18, 1);
+  --lighter:#FCF8BB;
+  --light: #FCEF90;
+  --med: #FFEC79;
+  --dark-grad:rgba(0, 0, 0, .8);
   --med-grad:rgba(229, 205, 185, .5);
-  --light-grad:rgba(240, 240, 0, 1);
+  --light-grad:rgba(240, 240, 0, 1);*/
+
+  --dark:rgba(26, 26, 33, 1);
+  --lighter:#FCF8BB;
+  --light: #FCEF90;
+  --med: #FFEC79;
+  --dark-grad:rgba(30, 30, 40, .8);
+  --med-grad:rgba(229, 205, 185, .5);
+  --light-grad:rgba(255, 232, 0, 1);
+
 
 }
 
@@ -138,7 +149,7 @@ h3{
  padding: 2% 0% 3% 4%;
  text-align: left;
  margin: 0px;
- color: rgba(0, 8, 118, 1);
+ color: var(--dark);
 }
 
 /* NAVIGATIONS */
@@ -156,7 +167,7 @@ h3{
   color: var(--dark);
   text-align: left;
   margin-top: 20px;
-  letter-spacing: 6px;
+  letter-spacing: 4px;
   text-transform: uppercase;
 }
 
@@ -164,15 +175,18 @@ h3{
   height: 100px;
   background-color: var(--dark);
   width: 100%;
+  margin-bottom: 2em;
 }
 
 /* NAVIGATIONS PLAYSLISTS */
 
 .playlist-nav {
- font-size: 1em;
- color: var(--dark);
- text-align: left;
- margin-top: 20px;
+  font-size: 1em;
+  color: var(--dark);
+  text-align: left;
+  margin-top: 20px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
 }
 
 .feed{
@@ -250,7 +264,7 @@ h3{
   position: relative;
   top: 0px;
   font-size: 1em;
-  padding: 4% 6% 4% 26%;
+  padding: 5% 6% 5% 26%;
   margin-left: 0;
   width: 100%;
   box-sizing: border-box;
@@ -277,7 +291,6 @@ h3{
 }
 
 .track{
- cursor: pointer;
  white-space: nowrap;
  overflow: hidden;
  text-overflow: ellipsis;
@@ -291,7 +304,6 @@ h3{
 }
 
 .current-track{
-  background-color: var(--light);
   color: var(--dark);
   display: inline;
   padding: 10px;
@@ -299,7 +311,7 @@ h3{
 }
 
 .currentTrack{
-  background-color: var(--light);
+  background-color: var(--med);
   color: var(--dark);
 }
 
@@ -319,7 +331,8 @@ h3{
   /* Info header Current Track */
 
   .info-panel{
-    max-height: 600px;
+    max-height: 540px;
+    height: 30%;
   }
 
 /* DUOTONE IMAGE*/
@@ -334,7 +347,7 @@ h3{
 
   .info-img {
     position: absolute;
-    top: 20%;
+    top: 10%;
     height: 40%;
     width: 40%;
     z-index: 1;
@@ -390,7 +403,7 @@ h3{
     background-color: var(--dark);
     width: 100%;
     z-index: 0;
-    top: 34%;
+    top: 24%;
     height: 7%;
   }
 
@@ -407,9 +420,8 @@ h3{
   .artist-name{
     position: absolute;
     width: 100%;
-    background-color: var(--light);
     height: 5%;
-    top: 41%;
+    top: 31%;
   }
 
   h3 {
@@ -424,9 +436,7 @@ h3{
   /*---------------------------------------------*/
 
   .playlist-nav {
-    font-size: large;
-    text-align: left;
-    margin-top: 20px;
+    margin-top: 3em;
   }
 
   .feed{
@@ -443,26 +453,25 @@ h3{
 
   .playlist {
     display:flex;
-    padding: 1em;
+
     flex-direction: column;
-    flex: 0 0 20%;
+    flex: 0 0 22em;
     background-color: white;
     color: var(--dark);
   }
 
   .playlist:hover{
     cursor:pointer;
-    background-color: var(--light);
-    color: var(--dark);
   }
 
   .playlist-titlecard{
     position: relative;
+    height:60px;
   }
 
   .nav-img {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
   }
 
   .nav-img img{
@@ -472,10 +481,10 @@ h3{
 
   .nav-img::after{
     content: " ";
-    width:80px;
-    height:80px;
+    width:60px;
+    height:60px;
     position:relative;
-    top: -83px;
+    top: -63px;
     left: 0px;
     z-index: 4;
     display: block;
@@ -509,11 +518,10 @@ h3{
   .tracks{
     display:block;
     text-align:left;
-    margin-top: 6em;
+    margin-top: 1em;
     height: 40em;
-    width: 14em;
+    width: 22em;
   }
-
 
   .track{
     cursor: pointer;
@@ -521,6 +529,11 @@ h3{
     overflow: hidden;
     text-overflow: ellipsis;
     padding-bottom: 10px;
+    padding-right: 1em;
+  }
+
+  .track:hover{
+    background-color: var(--lighter);
   }
 
   .note {

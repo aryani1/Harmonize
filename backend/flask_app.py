@@ -49,16 +49,16 @@ def auth_process(func):
             stored_user = db.users.find({'_id':username})
             if stored_user.count() < 1 or not is_matching_sessions(stored_user[0], request.cookies):
                 func(None)
-        
+
         print('auth_process: authenticated ')
         cache_path = '.cache-' + username
 
-        sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, 
+        sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri,
         scope=scope, cache_path=cache_path)
         return func(sp_oauth)
     return authorization_wrapper
 
-# Return a spotify authorization token if it 
+# Return a spotify authorization token if it
 # exists in the cache. Otherwise create a new
 # one.
 #
@@ -82,7 +82,7 @@ def check_cache(func):
         print(stored_user[0]['_id'])
         print('session matches!')
         cache_path = '.cache-' + username
-        sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, 
+        sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri,
                                 scope=scope, cache_path=cache_path)
         return func(sp_oauth, **kwargs)
     return save_and_cache_wrapper
@@ -126,7 +126,7 @@ def authorize(sp_oauth):
     #     return 'Authorized!'
     if not sp_oauth:
         print('authorize: trying to authorize user')
-        sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, 
+        sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri,
                                 scope=scope, cache_path=None)
 
         auth_url = sp_oauth.get_authorize_url(show_dialog=True)
@@ -147,7 +147,7 @@ def authorize_success():
     access_code = request.args.get('code', '')
 
     cache_path = cache_string + temp_filename
-    sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, 
+    sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri,
                         scope=scope, cache_path=cache_path)
 
     # Cache the access_token and refresh_token
@@ -172,13 +172,13 @@ def authorize_success():
     session_id = str(uuid.uuid4())
 
     # Update the database so the user has the correct
-    # access_token. If no user exists, insert a new 
+    # access_token. If no user exists, insert a new
     # entry.
     db.users.update({'_id':user}, {'_id':user, 'session_id':session_id,
      'access_token':access_token}, upsert=True)
 
-    # Create a Response object and set 
-    # a cookie that saves the username 
+    # Create a Response object and set
+    # a cookie that saves the username
     # at the client.
     resp = make_response()
     resp.set_cookie('username', user)
@@ -197,7 +197,7 @@ def get_playlists(sp_oauth, username):
 
     spotify = spotipy.Spotify(auth=access_token)
     results = spotify.user_playlists(username)
-    
+
     return jsonify(results)
 
 # Start playing
@@ -236,7 +236,7 @@ def get_current_user(sp_oauth):
     results = spotify.current_user()
 
     return str(results)
-    
+
 '''
 Helper functions
 '''
@@ -269,7 +269,7 @@ def set_users_track(user_list, track_id):
     user_reqs  = []
     for user in user_list:
         path = cache_path + user
-        sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, 
+        sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri,
                                 scope=scope, cache_path=path)
 
         token_info   = sp_oauth.get_cached_token()
