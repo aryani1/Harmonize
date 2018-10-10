@@ -5,7 +5,7 @@ import { selectTrack } from "../reducers/currentTrack";
 import { playTrack } from "./tracks";
 import Tracks from "./tracks";
 
-const Playlists = ({ playlists, dispatch }) => {
+const Playlists = ({ playlists, dispatch, currentTrack }) => {
   if (playlists) {
     return (
       <div className="list-feed">
@@ -15,6 +15,7 @@ const Playlists = ({ playlists, dispatch }) => {
               key={playlist.id}
               playlist={playlist}
               dispatch={dispatch}
+              currentTrack={currentTrack}
             />
           );
         })}
@@ -25,35 +26,35 @@ const Playlists = ({ playlists, dispatch }) => {
   }
 };
 
-const Playlist = ({ playlist, dispatch }) => {
-  return (
-    <div
-      key={playlist.id}
-      className="playlist"
-      onClick={() =>
-        fetchTracks(playlist).then(tracks => dispatch(setTracks(tracks)))
-      }
-    >
-      <div className="playlist-titlecard">
-        <img
-          className="nav-img"
-          src={playlist.images[0].url}
-          height="60"
-          width="60"
-        />
-        <div className="playlist-name">{playlist.name}</div>
-      </div>
-      <div>
-        <Tracks />
-      </div>
-    </div>
-  );
-};
+// const Playlist = ({ playlist, dispatch }) => {
+//   return (
+//     <div
+//       key={playlist.id}
+//       className="playlist"
+//       onClick={() =>
+//         fetchTracks(playlist).then(tracks => dispatch(setTracks(tracks)))
+//       }
+//     >
+//       <div className="playlist-titlecard">
+//         <img
+//           className="nav-img"
+//           src={playlist.images[0].url}
+//           height="60"
+//           width="60"
+//         />
+//         <div className="playlist-name">{playlist.name}</div>
+//       </div>
+//       <div>
+//         <Tracks />
+//       </div>
+//     </div>
+//   );
+// };
 
 class PlaylistComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { playlist: props.playlist, tracks: [], currentTrack: null, dispatch: props.dispatch };
+    this.state = { playlist: props.playlist, tracks: [], currentTrack: props.currentTrack, dispatch: props.dispatch };
     this.playEvent = this.playEvent.bind(this);
   }
 
@@ -71,7 +72,6 @@ class PlaylistComponent extends React.Component {
   }
 
   playEvent(track) {
-    this.setState({currentTrack: track});
     this.state.dispatch(selectTrack(track));
     playTrack(track);
   }
@@ -87,34 +87,16 @@ class PlaylistComponent extends React.Component {
                 </div>
             </div>
             <div>
-                <Tracks tracks={this.state.tracks} />
+              <Tracks
+              tracks={this.state.tracks}
+              currentTrack={this.state.currentTrack}
+              handlePlayTrack={this.playEvent}
+              />
             </div>
         </div>
         )
     }
 
-  render() {
-    return (
-      <div key={this.state.playlist.id} className="playlist">
-        <div className="playlist-titlecard">
-          <img
-            className="nav-img"
-            src={this.state.playlist.images[0].url}
-            height="60"
-            width="60"
-          />
-          <div className="playlist-name">{this.state.playlist.name}</div>
-        </div>
-        <div>
-          <Tracks
-            tracks={this.state.tracks}
-            currentTrack={this.state.currentTrack}
-            handlePlayTrack={this.playEvent}
-          />
-        </div>
-      </div>
-    );
-  }
 }
 
 const fetchTracks = playlist => {
@@ -125,6 +107,7 @@ const fetchTracks = playlist => {
 
 // mapStateToProps and mapDispatchToProps
 const mapStateToProps = state => {
+  console.log(state)
   return {
     playlists: state.playlists.items,
     currentTrack: state.currentTrack
