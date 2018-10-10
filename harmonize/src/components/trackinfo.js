@@ -5,7 +5,6 @@ const TrackInfo = ({track, dispatch}) => {
     let artists = 'asd'
     if (track){
         const n_artists = track.artists.length;
-        console.log(n_artists)
         if (n_artists > 1) {
             artists = track.artists.reduce(get_artists)
         }else{
@@ -16,7 +15,7 @@ const TrackInfo = ({track, dispatch}) => {
         track ?
         <div className="track-info">
             <div className="track-info-header">
-                <div class="info-img duotone">
+                <div className="info-img duotone">
                     <img src={track.album.images[0].url}/>
                 </div>
             </div>

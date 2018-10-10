@@ -57,7 +57,7 @@
 .feed{
   display:flex;
   height:100%;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .list-feed{
@@ -70,7 +70,7 @@
   display:flex;
   padding: 1em;
   flex-direction: column;
-  flex: 0 0 15%;
+  flex: 0 0 60%;
   background-color: white;
   color: var(--dark);
 }
@@ -79,12 +79,13 @@
   cursor:pointer;
   background-color: var(--light);
   color: var(--dark);
-  box-shadow: 0px 3px 16px #555;
+
 }
 
 .playlist-titlecard{
   display: flex;
   text-align: left;
+  width: 100px;
 }
 
 .playlist-name{
@@ -96,17 +97,27 @@
 }
 
 .tracks{
-  display:flex;
-  flex-direction:column;
+  display:block;
   text-align:left;
-  overflow: scroll;
-  height:400px;
   margin-top: 1em;
+  height: 60%;
+  width: 200px;
 }
 
 .track{
-  cursor:pointer;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-bottom: 10px;
 }
+
+.note {
+  display: inline;
+  padding: 10px;
+  font-size: .7em;
+}
+
 
 /* Info header Current Track */
 
