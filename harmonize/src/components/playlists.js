@@ -53,6 +53,7 @@ const Playlists = ({ playlists, dispatch, currentTrack }) => {
 
 class PlaylistComponent extends React.Component {
   constructor(props) {
+    console.log(props)
     super(props);
     this.state = { playlist: props.playlist, tracks: [], currentTrack: props.currentTrack, dispatch: props.dispatch };
     this.playEvent = this.playEvent.bind(this);
@@ -89,7 +90,7 @@ class PlaylistComponent extends React.Component {
             <div>
               <Tracks
               tracks={this.state.tracks}
-              currentTrack={this.state.currentTrack}
+              currentTrack={this.props.currentTrack}
               handlePlayTrack={this.playEvent}
               />
             </div>
