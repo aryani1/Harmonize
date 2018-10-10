@@ -6,7 +6,7 @@ const TrackInfo = ({ track, dispatch }) => {
   if (track) {
     const n_artists = track.artists.length;
     if (n_artists > 1) {
-      artists = track.artists.reduce(get_artists);
+      artists = track.artists.reduce(get_artist, '');
     } else {
       artists = track.artists[0].name;
     }
@@ -34,7 +34,14 @@ const TrackInfo = ({ track, dispatch }) => {
 
 // Reducer for concatenating artist strings
 const get_artists = (a, b) => a.name + ", " + b.name;
-
+function get_artist(acc, artist) {
+  if(acc == ''){
+    acc += artist.name;
+  }else {
+    acc+= ", " + artist.name
+  }
+  return acc
+}
 // mapStateToProps and mapDispatchToProps
 const mapStateToProps = state => {
   return {
