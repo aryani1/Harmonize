@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setTracks } from "../reducers/tracks";
 import { selectTrack } from "../reducers/currentTrack";
 import { playTrack } from "./tracks";
+import { setQueue } from '../reducers/trackQueue';
 import Tracks from "./tracks";
 
 const Playlists = ({ playlists, dispatch, currentTrack }) => {
@@ -25,31 +25,6 @@ const Playlists = ({ playlists, dispatch, currentTrack }) => {
     return <div />;
   }
 };
-
-// const Playlist = ({ playlist, dispatch }) => {
-//   return (
-//     <div
-//       key={playlist.id}
-//       className="playlist"
-//       onClick={() =>
-//         fetchTracks(playlist).then(tracks => dispatch(setTracks(tracks)))
-//       }
-//     >
-//       <div className="playlist-titlecard">
-//         <img
-//           className="nav-img"
-//           src={playlist.images[0].url}
-//           height="60"
-//           width="60"
-//         />
-//         <div className="playlist-name">{playlist.name}</div>
-//       </div>
-//       <div>
-//         <Tracks />
-//       </div>
-//     </div>
-//   );
-// };
 
 class PlaylistComponent extends React.Component {
   constructor(props) {
@@ -75,11 +50,15 @@ class PlaylistComponent extends React.Component {
     });
   }
 
-  playEvent(track) {
-    const playlistTracks = this.state.tracks;
+  playEvent(track, index) {
+    const playlistTracks = this.state.tracks.slice(index);
+
+    // update update state and play the track
     this.state.dispatch(selectTrack(track));
+    this.state.dispatch(setQueue(playlistTracks))
     playTrack(track, playlistTracks);
   }
+
   render() {
     const { playlist, tracks } = this.state;
     const { currentTrack } = this.props;

@@ -6,18 +6,18 @@ import { FaPlay } from "react-icons/fa";
 
 const Tracks = props => {
   let tracks = props.tracks;
-  let dispatch = props.dispatch;
   let currentTrack = props.currentTrack;
   let handlePlayTrack = props.handlePlayTrack;
   return tracks ? (
     <div className="tracks">
-      {tracks.map(track_info => {
+      {tracks.map((track_info, index) => {
         return (
           <Track
             key={track_info.track.id}
             track={track_info.track}
             handlePlayTrack={handlePlayTrack}
             currentTrack={currentTrack}
+            index = {index}
           />
         );
       })}
@@ -27,13 +27,13 @@ const Tracks = props => {
   );
 };
 
-const Track = ({ track, handlePlayTrack, currentTrack }) => {
+const Track = ({ track, handlePlayTrack, currentTrack, index }) => {
   const isCurrent = currentTrack && currentTrack.id == track.id;
   return (
     <div
       className={"track " + (isCurrent ? "currentTrack" : "")}
       key={track.id}
-      onClick={() => handlePlayTrack(track)}
+      onClick={() => handlePlayTrack(track, index)}
     >
       {isCurrent ? (
         <p className="current-track">
@@ -52,7 +52,6 @@ const Track = ({ track, handlePlayTrack, currentTrack }) => {
 };
 
 export const playTrack = (track, trackList) => {
-  // console.log(getTracksUri(trackList))
   return fetch("http://127.0.0.1:5000/play/" + track.uri, {
     method: "POST",
     credentials: "include",
