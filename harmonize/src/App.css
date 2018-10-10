@@ -94,7 +94,7 @@
  mix-blend-mode: lighten;
 }
 
-/* TRACKNAME */
+/* CURRENT TRACKNAME */
 
 .track-info-name{
  position:relative;
@@ -141,12 +141,15 @@ h3{
  color: rgba(0, 8, 118, 1);
 }
 
+/* NAVIGATIONS */
 
 .navigation-panel{
   width:90%;
   margin: auto;
   position:relative;
 }
+
+/* NAVIGATIONS QUEUE */
 
 .queue-nav{
   font-size: 1em;
@@ -162,6 +165,8 @@ h3{
   background-color: var(--dark);
   width: 100%;
 }
+
+/* NAVIGATIONS PLAYSLISTS */
 
 .playlist-nav {
  font-size: 1em;
@@ -193,7 +198,6 @@ h3{
 
 .playlist:hover{
  cursor:pointer;
-
 }
 
 .playlist-titlecard{
@@ -202,8 +206,8 @@ h3{
 }
 
 .nav-img {
- width: 80px;
- height: 80px;
+ width: 40px;
+ height: 40px;
  position: absolute;
  left: 0;
  margin-top: 0;
@@ -217,8 +221,8 @@ h3{
 
 .nav-img::after{
  content: " ";
- width:80px;
- height:80px;
+ width:40px;
+ height:40px;
  position:relative;
  top: -83px;
  left: 0px;
