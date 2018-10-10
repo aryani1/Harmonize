@@ -5,7 +5,6 @@ const TrackInfo = ({track, dispatch}) => {
     let artists = 'asd'
     if (track){
         const n_artists = track.artists.length;
-        console.log(n_artists)
         if (n_artists > 1) {
             artists = track.artists.reduce(get_artists)
         }else{
