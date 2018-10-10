@@ -6,6 +6,7 @@ from functools import wraps
 import os
 import time
 import uuid
+import json
 import spotipy
 import spotipy.util as util
 from spotipy.oauth2 import SpotifyOAuth
@@ -205,10 +206,12 @@ def play():
     get_spotify_lib().start_playback() #pylint: disable=E1120
     return "done!"
 
-@app.route('/play/<track_id>')
+@app.route('/play/<track_id>', methods=['GET', 'POST'])
 def play_track(track_id):
     #get_spotify_lib().start_playback(uris=[track_id]) #pylint: disable=E1120
-    set_users_track(get_user_list(None), track_id)
+    decoded_tracks = request.data.decode("utf-8")
+    decoded_tracks = json.loads(decoded_tracks)
+    set_users_track(get_user_list(None), decoded_tracks)
     return "done!"
 
 # Get tracks from a playlist
@@ -278,7 +281,7 @@ def set_users_track(user_list, track_id):
     prev_time = 0
     for u in user_reqs:
         start_time = time.time()
-        u.start_playback(uris=[track_id])
+        u.start_playback(uris=track_id)
         u.seek_track(prev_time)
         prev_time = (time.time() - start_time) * 1000
 

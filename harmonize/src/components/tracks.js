@@ -41,9 +41,22 @@ const Track = ({track, handlePlayTrack, currentTrack}) => {
 }
 
 export const playTrack = (track, trackList) => {
-    return fetch("http://127.0.0.1:5000/play/"+track.uri, {'credentials':'include'}).then(_ =>
+    // console.log(getTracksUri(trackList))
+    return fetch("http://127.0.0.1:5000/play/"+track.uri, {
+        method: 'POST',
+        credentials:'include',
+        body: JSON.stringify(getTracksUri(trackList))
+    }).then(_ =>
     track
     );
+}
+
+const getTracksUri = tracks => {
+    var trackIDs = []
+    tracks.map(trackInfo => {
+        trackIDs.push(trackInfo.track.uri)
+    })
+    return trackIDs
 }
 
 

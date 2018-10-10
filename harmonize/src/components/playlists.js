@@ -53,9 +53,8 @@ const Playlists = ({ playlists, dispatch, currentTrack }) => {
 
 class PlaylistComponent extends React.Component {
   constructor(props) {
-    console.log(props)
     super(props);
-    this.state = { playlist: props.playlist, tracks: [], currentTrack: props.currentTrack, dispatch: props.dispatch };
+    this.state = { playlist: props.playlist, tracks: [], dispatch: props.dispatch };
     this.playEvent = this.playEvent.bind(this);
   }
 
@@ -73,36 +72,38 @@ class PlaylistComponent extends React.Component {
   }
 
   playEvent(track) {
+    const playlistTracks = this.state.tracks
     this.state.dispatch(selectTrack(track));
-    playTrack(track);
+    playTrack(track, playlistTracks);
   }
     render() {
-        return(
-        <div key={this.state.playlist.id} className="playlist" >
+      const { playlist, tracks } = this.state;
+      const { currentTrack } = this.props;
+      return(
+        <div key={playlist.id} className="playlist" >
             <div className="playlist-titlecard">
                 <div className="nav-img nav-duotone">
-                    <img src={this.state.playlist.images[0].url}/>
+                    <img src={playlist.images[0].url}/>
                 </div>
                 <div className="playlist-name" >
-                    {this.state.playlist.name}
+                    {playlist.name}
                 </div>
             </div>
             <div>
               <Tracks
-              tracks={this.state.tracks}
-              currentTrack={this.props.currentTrack}
+              tracks={tracks}
+              currentTrack={currentTrack}
               handlePlayTrack={this.playEvent}
               />
             </div>
         </div>
         )
     }
-
 }
 
 const fetchTracks = playlist => {
   return fetch("http://127.0.0.1:5000/playlists/" + playlist.id, {
-    credentials: "include"
+    credentials: "include",
   }).then(data => data.json());
 };
 
