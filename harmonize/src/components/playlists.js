@@ -75,6 +75,23 @@ class PlaylistComponent extends React.Component {
     this.state.dispatch(selectTrack(track));
     playTrack(track);
   }
+    render() {
+        return(
+        <div key={this.state.playlist.id} className="playlist" >
+            <div className="playlist-titlecard">
+                <div className="nav-img nav-duotone">
+                    <img src={this.state.playlist.images[0].url}/>
+                </div>
+                <div className="playlist-name" >
+                    {this.state.playlist.name}
+                </div>
+            </div>
+            <div>
+                <Tracks tracks={this.state.tracks} />
+            </div>
+        </div>
+        )
+    }
 
   render() {
     return (
