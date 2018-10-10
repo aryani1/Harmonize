@@ -141,14 +141,29 @@ h3{
  color: rgba(0, 8, 118, 1);
 }
 
+
 .navigation-panel{
   width:90%;
   margin: auto;
   position:relative;
 }
 
+.queue-nav{
+  font-size: 1em;
+  color: var(--dark);
+  text-align: left;
+  margin-top: 20px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
 
-.App-intro {
+.queue-panel{
+  height: 100px;
+  background-color: var(--dark);
+  width: 100%;
+}
+
+.playlist-nav {
  font-size: 1em;
  color: var(--dark);
  text-align: left;
@@ -169,28 +184,30 @@ h3{
 
 .playlist {
  display:flex;
- padding: 1em;
  flex-direction: column;
  flex: 0 0 60%;
  background-color: white;
  color: var(--dark);
+ margin-left: 10px;
 }
 
 .playlist:hover{
  cursor:pointer;
- background-color: var(--light);
- color: var(--dark);
 
 }
 
 .playlist-titlecard{
  position: relative;
+ height: 100%;
 }
 
 .nav-img {
  width: 80px;
  height: 80px;
-
+ position: absolute;
+ left: 0;
+ margin-top: 0;
+ z-index: 2;
 }
 
 .nav-img img{
@@ -203,7 +220,7 @@ h3{
  width:80px;
  height:80px;
  position:relative;
- top: -80px;
+ top: -83px;
  left: 0px;
  z-index: 4;
  display: block;
@@ -225,26 +242,32 @@ h3{
 }
 
 .playlist-name{
-  position: absolute;
-  top: 10%;
-  font-size: 1em;
-  margin-left: 5%;
-  padding: 2%;
-  width:80%;
+  position: relative;
+  top: 20px;
+  font-size: .8em;
+  padding: 2% 4%;
+  margin-left: 80px;
+  width:40%;
   text-align: left;
   text-transform: uppercase;
   letter-spacing: 4px;
-  color: white;
-  background-color: var(--dark);
-  z-index: 4;
+  color: var(--dark);
+  background-color: var(--light);
+  z-index: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tracks{
  display:block;
+ position: relative;
+ top: 50px;
  text-align:left;
  margin-top: 1em;
- height: 60%;
+ height: 200px;
  width: 200px;
+ margin-left: 10px;
 }
 
 .track{
@@ -261,8 +284,6 @@ h3{
  font-size: .7em;
 }
 
-
-
 @media all and (min-width: 900px) {
 
   .App-header {
@@ -276,11 +297,9 @@ h3{
     font-size: 1.2em;
   }
 
-  .App-intro {
-    font-size: large;
-    text-align: left;
-    margin-top: 20px;
-  }
+
+
+
 
 
   /* Info header Current Track */
@@ -307,7 +326,6 @@ h3{
     z-index: 1;
   }
 
-  /* continued duotone image */
   .info-img img{
     width: 100%;
     height: 100%;
@@ -391,14 +409,11 @@ h3{
 
   /*---------------------------------------------*/
 
-
-
-  .App-intro {
+  .playlist-nav {
     font-size: large;
     text-align: left;
+    margin-top: 20px;
   }
-
-  /*  */
 
   .feed{
     display:flex;
@@ -416,7 +431,7 @@ h3{
     display:flex;
     padding: 1em;
     flex-direction: column;
-    flex: 0 0 60%;
+    flex: 0 0 20%;
     background-color: white;
     color: var(--dark);
   }
@@ -425,7 +440,6 @@ h3{
     cursor:pointer;
     background-color: var(--light);
     color: var(--dark);
-
   }
 
   .playlist-titlecard{
@@ -435,7 +449,6 @@ h3{
   .nav-img {
     width: 80px;
     height: 80px;
-
   }
 
   .nav-img img{
@@ -448,7 +461,7 @@ h3{
     width:80px;
     height:80px;
     position:relative;
-    top: -80px;
+    top: -83px;
     left: 0px;
     z-index: 4;
     display: block;
@@ -475,18 +488,18 @@ h3{
     text-transform: uppercase;
     letter-spacing: 4px;
     position: absolute;
-    top: 50%;
-    background-color: white;
+    top: 1%;
     z-index: 1;
   }
 
   .tracks{
     display:block;
     text-align:left;
-    margin-top: 1em;
-    height: 60%;
-    width: 200px;
+    margin-top: 6em;
+    height: 40em;
+    width: 14em;
   }
+
 
   .track{
     cursor: pointer;

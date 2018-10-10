@@ -34,13 +34,20 @@ class App extends Component {
           </div>
 
           <div className="navigation-panel">
-            <p className="App-intro">
+
+            <p className="queue-nav">
+              Queue
+            </p>
+
+            <div className="queue-panel"></div>
+
+            <p className="playlist-nav">
               Your Playlists
             </p>
 
             <div className="feed">
               <Playlists />
-              {/* <Tracks /> */}
+              <Tracks />
             </div>
 
           </div>
