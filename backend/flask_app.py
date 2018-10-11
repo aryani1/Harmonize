@@ -239,7 +239,7 @@ def get_current_user(sp_oauth):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 #@auth_process
-def hello_world():
+def hello_world(path):
 
     print(build_path)
     return send_from_directory(build_path, 'index.html')
