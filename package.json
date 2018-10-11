@@ -1,0 +1,7 @@
+{
+    "name": "harmonize",
+    "version":"1.0.0",
+    "engines": {
+        "node": "8.11.4"
+    }
+}
