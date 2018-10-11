@@ -44,6 +44,9 @@ class App extends Component {
           <p className="App-title">Harmonize</p>
         </header>
         <div className="landing-panel">
+          <p className="app-description">
+          Join the listening party!
+          </p>
           <img className="landing-img" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f9f0fdc18a215ec725f8ca61dc6fcbdf&auto=format&fit=crop&w=3300&q=80"/>
           <a className= "login-button" href="https://accounts.spotify.com/en/authorize?client_id=e6723e026ea24e958ddb995bf8ce0c4c&response_type=code&redirect_uri=harmonize-app.herokuapp.com%2Fauthorize_success&scope=user-library-read%20user-modify-playback-state" > Connect to Spotify </a>
         </div>
