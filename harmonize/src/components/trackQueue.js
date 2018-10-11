@@ -1,14 +1,20 @@
 import React from 'react'
 import { connect } from "react-redux";
 import trackinfo from './trackinfo';
+import { FaMusic } from "react-icons/fa";
+
 const TrackQueue = ({queue}) => {
     console.log(queue)
     return(
-        <div>
+        <div className="track-queue" >
             {
                 queue.map(trackInfo => {
                     const { track } = trackInfo
-                    return <div key={track.id}>
+                    return <div className="queue-track" key={track.id}>
+                      <p className="note">
+                        {" "}
+                        <FaMusic />{" "}
+                      </p>
                      {track.name}
                      </div>
                 })

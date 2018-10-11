@@ -52,12 +52,40 @@
 
 }
 
+/* Log in */
+
+.ladning-panel{
+  position:relative;
+  background-color: var(--lighter);
+  display: flex;
+}
+
+.landing-img{
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
+}
+
+.login-button{
+  position: absolute;
+  background-color: var(--dark);
+  color: var(--lighter);
+  text-decoration: none;
+  width: 60vw;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  top: 80vh;
+  left: 15vw;
+  text-align: center;
+  padding: 5vw;
+  box-shadow: 0 7px 14px #000;
+}
+
 /* Info header Current Track */
 
 .info-panel{
   width:100%;
   position: relative;
-  min-height: 100px;
   margin: auto;
 }
 
@@ -161,36 +189,72 @@ h3{
   position:relative;
 }
 
-/* NAVIGATIONS QUEUE */
-
-.queue-nav{
+.nav-sub-header{
   font-size: 1em;
   color: var(--dark);
   text-align: left;
   margin-top: 20px;
   letter-spacing: 4px;
   text-transform: uppercase;
+}
+
+/* NAVIGATIONS QUEUE */
+
+.queue-nav:hover{
+  cursor: pointer;
 }
 
 .queue-panel{
   height: 100%;
-  min-height: 100px;
-  background-color: var(--dark);
-  width: 100%;
+  background-color: var(--lighter);
+  width:100%;
+  overflow: scroll;
   margin-bottom: 2em;
   color:white;
 }
 
-/* NAVIGATIONS PLAYSLISTS */
-
-.playlist-nav {
-  font-size: 1em;
+.track-queue{
+  padding: 10px;
   color: var(--dark);
-  text-align: left;
-  margin-top: 20px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
+  font-size: .8 em;
+  line-height: 1.8;
 }
+
+.queue-track:first-child{
+  margin-bottom: 1em;
+  font-size: 1em;
+}
+
+.queue-track:first-child::before{
+  content: "Now playing:";
+  text-transform: uppercase;
+  font-size: .6em;
+  display: block;
+}
+
+.queue-track:nth-child(2)::before{
+  content: "Next:";
+  text-transform: uppercase;
+  font-size: .6em;
+  display: block;
+}
+
+.queue-hidden{
+  display: none;
+}
+
+/* NAVIGATIONS LISTERNERS */
+
+.listeners-panel{
+  background-color: var(--lighter);
+  height: 100px;
+}
+
+.listeners-hidden{
+  display: none;
+}
+
+/* NAVIGATIONS PLAYSLISTS */
 
 .feed{
  display:flex;
