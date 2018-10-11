@@ -10,7 +10,7 @@ import TrackQueue from './components/trackQueue'
 import './App.css';
 
 const fetchPlaylists = () => {
-  return fetch("http://127.0.0.1:5000/playlists", {'credentials':'include'}).then(data =>
+  return fetch("/playlists", {'credentials':'include'}).then(data =>
     data.json()
   );
 };
