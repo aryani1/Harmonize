@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, jsonify, make_response, session, Blueprint
+from flask import Flask, request, redirect, jsonify, make_response, session, send_from_directory
 from flask_cors import CORS
 from pymongo import MongoClient
 from functools import wraps
@@ -14,7 +14,10 @@ from spotipy.oauth2 import SpotifyOAuth
 '''
 Create the flask app
 '''
-app = Flask(__name__)
+build_path = os.path.abspath(
+    os.path.join(os.getcwd(), '..', 'harmonize', 'build')
+    )
+app = Flask(__name__, static_folder=build_path+'/static')
 CORS(app, supports_credentials=True)
 
 '''
@@ -107,11 +110,12 @@ def get_username(func):
         return func(sp_oauth, user, **kwargs)
     return username_wrapper
 
-
 @app.route('/')
-@auth_process
-def hello_world(oauth):
-    return 'Hello, World!'
+#@auth_process
+def hello_world():
+
+    print(build_path)
+    return send_from_directory(build_path, 'index.html')
 
 def search(name):
     return spotify.search(q='artist:' + name, type='artist')

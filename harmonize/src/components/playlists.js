@@ -90,7 +90,6 @@ const fetchTracks = playlist => {
 
 // mapStateToProps and mapDispatchToProps
 const mapStateToProps = state => {
-  console.log(state);
   return {
     playlists: state.playlists.items,
     currentTrack: state.currentTrack,
