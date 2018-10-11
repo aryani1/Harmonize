@@ -83,7 +83,7 @@ class PlaylistComponent extends React.Component {
 }
 
 const fetchTracks = playlist => {
-  return fetch("http://127.0.0.1:5000/playlists/" + playlist.id, {
+  return fetch("/playlists/" + playlist.id, {
     credentials: "include"
   }).then(data => data.json());
 };

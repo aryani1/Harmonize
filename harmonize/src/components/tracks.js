@@ -52,7 +52,7 @@ const Track = ({ track, handlePlayTrack, currentTrack, index }) => {
 };
 
 export const playTrack = (track, trackList) => {
-  return fetch("http://127.0.0.1:5000/play/" + track.uri, {
+  return fetch("/play/" + track.uri, {
     method: "POST",
     credentials: "include",
     body: JSON.stringify(getTracksUri(trackList))
