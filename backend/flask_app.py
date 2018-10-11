@@ -28,7 +28,7 @@ spotify = spotipy.Spotify()
 # username = 'bullenbygg1337'
 client_id = os.environ['CLIENT_ID']
 client_secret = os.environ['CLIENT_SECRET']
-redirect_uri='http://127.0.0.1:5000/authorize_success'
+redirect_uri='http://harmonize-app.herokuapp.com/authorize_success'
 scope='user-library-read user-modify-playback-state user-modify-playback-state'
 
 '''
