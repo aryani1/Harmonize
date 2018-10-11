@@ -110,12 +110,7 @@ def get_username(func):
         return func(sp_oauth, user, **kwargs)
     return username_wrapper
 
-@app.route('/')
-#@auth_process
-def hello_world():
 
-    print(build_path)
-    return send_from_directory(build_path, 'index.html')
 
 def search(name):
     return spotify.search(q='artist:' + name, type='artist')
@@ -241,6 +236,13 @@ def get_current_user(sp_oauth):
 
     return str(results)
 
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+#@auth_process
+def hello_world():
+
+    print(build_path)
+    return send_from_directory(build_path, 'index.html')
 '''
 Helper functions
 '''
