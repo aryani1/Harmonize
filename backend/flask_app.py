@@ -291,8 +291,12 @@ def set_users_track(user_list, track_id, track_list):
 
     return "woho!"
 
-@app.route('/test')
-def test():
-    user_list = get_user_list('aurorabrun')
-    set_users_track(user_list, None)
-    return str(user_list)
+# @app.route('/test')
+# def test():
+#     user_list = get_user_list('aurorabrun')
+#     set_users_track(user_list, None)
+#     return str(user_list)
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
