@@ -28,13 +28,14 @@ spotify = spotipy.Spotify()
 # username = 'bullenbygg1337'
 client_id = os.environ['CLIENT_ID']
 client_secret = os.environ['CLIENT_SECRET']
+mongodb_uri = os.environ['MONGOLAB_URI']
 redirect_uri='http://harmonize-app.herokuapp.com/authorize_success'
 scope='user-library-read user-modify-playback-state user-modify-playback-state'
 
 '''
 Database
 '''
-client = MongoClient('localhost', 27017)
+client = MongoClient(mongodb_uri)
 db = client['harmonize']
 
 '''
