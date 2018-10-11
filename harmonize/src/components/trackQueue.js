@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from "react-redux";
 import trackinfo from './trackinfo';
 const TrackQueue = ({queue}) => {
-    console.log(queue)
     return(
         <div>
             {
@@ -18,7 +17,6 @@ const TrackQueue = ({queue}) => {
 }
 // mapStateToProps and mapDispatchToProps
 const mapStateToProps = state => {
-    console.log(state)
     return {
       queue:state.queue
     };
