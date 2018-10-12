@@ -12,22 +12,13 @@
 
 :root {
 
-/*  --dark:rgba(0, 8, 18, 1);
-  --lighter:#FCF8BB;
-  --light: #FCEF90;
-  --med: #FFEC79;
-  --dark-grad:rgba(0, 0, 0, .8);
-  --med-grad:rgba(229, 205, 185, .5);
-  --light-grad:rgba(240, 240, 0, 1);*/
-
   --dark:rgba(26, 26, 33, 1);
   --lighter:#FCF8BB;
-  --light: #FCEF90;
-  --med: #FFEC79;
-  --dark-grad:rgba(30, 30, 40, .8);
-  --med-grad:rgba(229, 205, 185, .5);
-  --light-grad:rgba(255, 232, 0, 1);
-
+  --light: #FFEC79;
+  --med: #FFDF61;
+  --dark-grad:rgba(0, 0, 0, .8);
+  --med-grad:rgba(255, 239, 140, .2);
+  --light-grad:rgba(255, 211, 0, 1);
 
 }
 
@@ -52,12 +43,49 @@
 
 }
 
+/* Log in */
+
+.ladning-panel{
+  position:relative;
+}
+
+.landing-img{
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
+}
+
+.app-description{
+  position:absolute;
+  top:40vh;
+  left: 15vw;
+  width:60vw;
+  background-color: white;
+  text-align: center;
+  font-size: 1em;
+  padding: 10vw 5vw;
+}
+
+.login-button{
+  position: absolute;
+  background-color: var(--dark);
+  color: var(--lighter);
+  text-decoration: none;
+  width: 60vw;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  top: 80vh;
+  left: 15vw;
+  text-align: center;
+  padding: 5vw;
+  box-shadow: 0 7px 14px #000;
+}
+
 /* Info header Current Track */
 
 .info-panel{
   width:100%;
   position: relative;
-  min-height: 100px;
   margin: auto;
 }
 
@@ -141,7 +169,7 @@ h2 {
  top: 0;
  left: 0;
  width: 100%;
- background-color: var(--light);
+ background-color: var(--med);
 }
 
 h3{
@@ -161,36 +189,72 @@ h3{
   position:relative;
 }
 
-/* NAVIGATIONS QUEUE */
-
-.queue-nav{
+.nav-sub-header{
   font-size: 1em;
   color: var(--dark);
   text-align: left;
   margin-top: 20px;
   letter-spacing: 4px;
   text-transform: uppercase;
+}
+
+/* NAVIGATIONS QUEUE */
+
+.queue-nav:hover{
+  cursor: pointer;
 }
 
 .queue-panel{
   height: 100%;
-  min-height: 100px;
-  background-color: var(--dark);
-  width: 100%;
+  background-color: var(--med);
+  width:100%;
+  overflow: scroll;
   margin-bottom: 2em;
   color:white;
 }
 
-/* NAVIGATIONS PLAYSLISTS */
-
-.playlist-nav {
-  font-size: 1em;
+.track-queue{
+  padding: 10px;
   color: var(--dark);
-  text-align: left;
-  margin-top: 20px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
+  font-size: .8 em;
+  line-height: 1.8;
 }
+
+.queue-track:first-child{
+  margin-bottom: 1em;
+  font-size: 1em;
+}
+
+.queue-track:first-child::before{
+  content: "Now playing:";
+  text-transform: uppercase;
+  font-size: .6em;
+  display: block;
+}
+
+.queue-track:nth-child(2)::before{
+  content: "Next:";
+  text-transform: uppercase;
+  font-size: .6em;
+  display: block;
+}
+
+.queue-hidden{
+  display: none;
+}
+
+/* NAVIGATIONS LISTERNERS */
+
+.listeners-panel{
+  background-color: var(--lighter);
+  height: 100px;
+}
+
+.listeners-hidden{
+  display: none;
+}
+
+/* NAVIGATIONS PLAYSLISTS */
 
 .feed{
  display:flex;
@@ -306,16 +370,21 @@ h3{
  font-size: .7em;
 }
 
-.current-track{
-  color: var(--dark);
+.playing {
+  color: var(--med);
   display: inline;
   padding: 10px;
   font-size: .7em;
 }
 
 .currentTrack{
-  background-color: var(--med);
-  color: var(--dark);
+  /* background-color: var(--med); */
+  color: var(--med);
+}
+
+.artist-name-playlist {
+  margin: 5px 0 0 36px;
+  font-size: .8em;
 }
 
 @media all and (min-width: 900px) {
@@ -332,6 +401,26 @@ h3{
     font-size: 1.2vw;
     margin: auto;
   }
+
+  .app-description{
+    position:absolute;
+    top:40vh;
+    left: 15vw;
+    width:20vw;
+    font-size: 1em;
+    padding: 6vh 2vw;
+  }
+
+  .login-button{
+    width: 10vw;
+    top: 60vh;
+    left: 15vw;
+    text-align: center;
+    padding: 2vw 3vw;
+    box-shadow: 0 7px 14px #000;
+  }
+
+
 
   /* Info header Current Track */
 

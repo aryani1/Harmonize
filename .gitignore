@@ -4,3 +4,4 @@ backend/setup_env.sh
 .cache-*
 backend/__pycache__/*.pyc
 backend/__pycache__/flask_app.cpython-37.pyc
+*.DS_Store
