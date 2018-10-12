@@ -188,7 +188,7 @@ def authorize_success():
     # Create a Response object and set
     # a cookie that saves the username
     # at the client.
-    resp = make_response()
+    resp = redirect('/', code=302)
     resp.set_cookie('username', user)
     resp.set_cookie('session_id', session_id)
     print('cookie saved!')
