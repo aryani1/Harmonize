@@ -29,6 +29,15 @@ const Tracks = props => {
 
 const Track = ({ track, handlePlayTrack, currentTrack, index }) => {
   const isCurrent = currentTrack && currentTrack.id == track.id;
+  let artists = "asd";
+  if (track) {
+    const n_artists = track.artists.length;
+    if (n_artists > 1) {
+      artists = track.artists.reduce(get_artist, '');
+    } else {
+      artists = track.artists[0].name;
+    }
+  }
   return (
     <div
       className={"track " + (isCurrent ? "currentTrack" : "")}
@@ -36,7 +45,7 @@ const Track = ({ track, handlePlayTrack, currentTrack, index }) => {
       onClick={() => handlePlayTrack(track, index)}
     >
       {isCurrent ? (
-        <p className="current-track">
+        <p className="playing">
           {" "}
           <FaPlay />{" "}
         </p>
@@ -47,6 +56,9 @@ const Track = ({ track, handlePlayTrack, currentTrack, index }) => {
         </p>
       )}{" "}
       {track.name}
+      <p className="artist-name-playlist">
+        {artists}
+      </p>
     </div>
   );
 };
@@ -66,6 +78,18 @@ const getTracksUri = tracks => {
   });
   return trackIDs;
 };
+
+// Reducer for concatenating artist strings
+const get_artists = (a, b) => a.name + ", " + b.name;
+function get_artist(acc, artist) {
+  if(acc == ''){
+    acc += artist.name;
+  }else {
+    acc+= ", " + artist.name
+  }
+  return acc
+}
+
 
 // map stuff
 // const mapStateToProps = state => {
