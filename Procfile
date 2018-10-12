@@ -1,1 +1,1 @@
-web: cd harmonize && npm install && cd ../backend && gunicorn flask_app:app --bind 0.0.0.0:$PORT
+web: cd harmonize && yarn install && cd ../backend && gunicorn flask_app:app --bind 0.0.0.0:$PORT
