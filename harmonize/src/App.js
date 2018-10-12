@@ -17,15 +17,26 @@ const fetchPlaylists = () => {
 
 
 class App extends Component {
+
+  // setStateLoggedin = () => {
+  //   this.setState({loggedin: !this.state.loggedin});
+  // }
+
+
   state = {
-    queueHidden: true,
-    listenersHidden: true,
-    loggedin: true
-  };
+      queueHidden: true,
+      listenersHidden: true,
+      loggedin: false
+    };
 
   componentDidMount() {
-      const { dispatch } = this.props;
-      fetchPlaylists().then(playlists => ( dispatch(setPlaylists(playlists)) ));
+      this.fetchLoggedinStatus().then(loggedinStatus => {
+        if (loggedinStatus === true) {
+          console.log('Henter playlists')
+          const { dispatch } = this.props;
+          fetchPlaylists().then(playlists =>  dispatch(setPlaylists(playlists)) );
+        }
+      });
   }
 
   toggleQueueHidden = () => {
@@ -34,6 +45,21 @@ class App extends Component {
 
   toggleListenersHidden = () => {
     this.setState({listenersHidden: ! this.state.listenersHidden});
+  }
+
+/* Fetch login state and playlists*/
+
+  fetchLoggedinStatus = () => {
+    return fetch("/authorize", {'credentials': 'include'}).then(response => {
+      if (response.status == 200) {
+        console.log ("Logget in");
+        this.setState({loggedin: true});
+        return true;
+      }
+      console.log ("Ikke logget in");
+      return false;
+    })
+    .catch(() => {})
   }
 
   render() {
@@ -50,7 +76,7 @@ class App extends Component {
             Join the listening party!
             </p>
             <img className="landing-img" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f9f0fdc18a215ec725f8ca61dc6fcbdf&auto=format&fit=crop&w=3300&q=80"/>
-            <a className= "login-button" href="https://accounts.spotify.com/en/authorize?client_id=e6723e026ea24e958ddb995bf8ce0c4c&response_type=code&redirect_uri=harmonize-app.herokuapp.com%2Fauthorize_success&scope=user-library-read%20user-modify-playback-state" > Connect to Spotify </a>
+            <a className= "login-button" href="/authorize" > Connect to Spotify </a>
           </div>
           }
         </div>

@@ -144,7 +144,7 @@ def authorize(sp_oauth):
         return redirect(auth_url, code=302)
 
     print('authorize: user is already cached!')
-    return "authorized"
+    return redirect('/', code=302)
 
 # Get and cache access token
 @app.route('/authorize_success')
