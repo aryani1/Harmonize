@@ -16,7 +16,7 @@ pylint==2.1.1
 pymongo==3.7.1
 requests==2.19.1
 six==1.11.0
-spotipy==2.4.4
+git+https://github.com/plamere/spotipy
 urllib3==1.23
 Werkzeug==0.14.1
 wrapt==1.10.11
