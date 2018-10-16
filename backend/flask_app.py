@@ -33,7 +33,7 @@ if process_env is not None and process_env == 'production':
     redirect_uri='http://harmonize-app.herokuapp.com/authorize_success'
 else:
     client = MongoClient('localhost', 27017)
-    redirect_uri='http://127.0.0.1:5000/authorize_success'
+    redirect_uri='http://127.0.0.1:3000'
 
 client_id = os.environ['CLIENT_ID']
 client_secret = os.environ['CLIENT_SECRET']
@@ -119,7 +119,9 @@ def get_username(func):
         return func(sp_oauth, user, **kwargs)
     return username_wrapper
 
-
+@app.route('/lol')
+def lol():
+    return "hello, world"
 
 def search(name):
     return spotify.search(q='artist:' + name, type='artist')
@@ -128,10 +130,6 @@ def search(name):
 @app.route('/authorize/')
 @check_cache
 def authorize(sp_oauth):
-    # if sp_oauth:
-    #     token_info = sp_oauth.get_cached_token()
-    #     access_token = token_info['access_token']
-    #     return 'Authorized!'
     if not sp_oauth:
         print('authorize: trying to authorize user')
         sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri,
@@ -141,7 +139,7 @@ def authorize(sp_oauth):
         resp = redirect(auth_url)
         resp.headers['Access-Control-Allow-Origin'] = "https://accounts.spotify.com"
         print(resp.headers)
-        return redirect(auth_url, code=302)
+        return redirect(auth_url, code=200)
 
     print('authorize: user is already cached!')
     return redirect('/', code=302)
@@ -248,8 +246,9 @@ def get_current_user(sp_oauth):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 #@auth_process
-def hello_world(path):
+def home_page(path):
     print(build_path)
+    print(request.args.get('code', 'lolololol'))
     return send_from_directory(build_path, 'index.html')
 '''
 Helper functions
