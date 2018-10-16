@@ -5,7 +5,8 @@ import Playlists from './components/playlists'
 import Tracks from './components/tracks'
 import TrackInfo from './components/trackinfo'
 import TrackQueue from './components/trackQueue'
-import { FaPlus } from 'react-icons/fa'
+import { MdPlaylistPlay, MdKeyboardArrowUp } from "react-icons/md";
+
 
 import './App.css';
 
@@ -89,7 +90,7 @@ class App extends Component {
             <div className="navigation-panel">
 
               <p className="nav-sub-header" onClick={this.toggleQueueHidden} >
-                Queue
+                Queue <MdKeyboardArrowUp className={`down ${this.state.queueHidden ? "up" : ""}`}/>
               </p>
 
               <div className={`queue-panel ${this.state.queueHidden ? "queue-hidden" : ""}`}>
@@ -97,7 +98,7 @@ class App extends Component {
               </div>
 
               <p className="nav-sub-header" onClick={this.toggleListenersHidden}>
-                Listeners
+                Listeners <MdKeyboardArrowUp className={`down ${this.state.listenersHidden ? "up" : ""}`}/>
               </p>
 
               <div className={`listeners-panel ${this.state.listenersHidden ? "listeners-hidden" : ""}`}>

@@ -1,8 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { selectTrack } from "../reducers/currentTrack";
-import { FaMusic } from "react-icons/fa";
-import { FaPlay } from "react-icons/fa";
+import { FaMusic, FaPlay, FaPlus } from "react-icons/fa";
+import { MdPlaylistAdd, MdMusicNote, MdPlayArrow } from "react-icons/md";
+import { IoIosMusicalNotes } from 'react-icons/io';
+
 
 const Tracks = props => {
   let tracks = props.tracks;
@@ -42,23 +44,33 @@ const Track = ({ track, handlePlayTrack, currentTrack, index }) => {
     <div
       className={"track " + (isCurrent ? "currentTrack" : "")}
       key={track.id}
-      onClick={() => handlePlayTrack(track, index)}
     >
       {isCurrent ? (
         <p className="playing">
           {" "}
-          <FaPlay />{" "}
+          <MdPlayArrow />{" "}
         </p>
       ) : (
         <p className="note">
           {" "}
-          <FaMusic />{" "}
+          <IoIosMusicalNotes />{" "}
         </p>
       )}{" "}
-      {track.name}
-      <p className="artist-name-playlist">
-        {artists}
+      <div className="playlist-names"
+        onClick={() => handlePlayTrack(track, index)}
+      >
+        <div className="playlist-track-name">
+          {track.name}
+        </div>
+        <p className="artist-name-playlist">
+          {artists}
+        </p>
+      </div>
+      <p className="add-to-queue">
+        {" "}
+        <MdPlaylistAdd />{" "}
       </p>
+
     </div>
   );
 };

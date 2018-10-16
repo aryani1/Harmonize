@@ -4,20 +4,22 @@
 
 .App {
   text-align: left;
-  background-color: #fff;
+  background-color: var(--dark);
   height:100%;
-  color: var(--dark);
+  color: white;
   font-weight: 100;
 }
 
 :root {
 
-  --dark:rgba(26, 26, 33, 1);
+  /* --dark:rgba(26, 26, 33, 1); */
+  --darker:rgba(10, 10, 10, 1);
+  --dark:rgba(30, 30, 30, 1);
   --lighter:#FCF8BB;
   --light: #FFEC79;
   --med: #FFDF61;
-  --dark-grad:rgba(0, 0, 0, .8);
-  --med-grad:rgba(255, 239, 140, .2);
+  --dark-grad:rgba(2, 2, 2, .5);
+  --med-grad:rgba(255, 239, 140, .4);
   --light-grad:rgba(255, 211, 0, 1);
 
 }
@@ -148,9 +150,10 @@
  position: relative;
  top: 0;
  margin: 0% 0%;
- background-color: var(--dark);
+ background-color: var(--darker);
  width: 100%;
  z-index: 3;
+ box-shadow: 0 3px 7px #111;
 }
 
 h2 {
@@ -170,6 +173,7 @@ h2 {
  left: 0;
  width: 100%;
  background-color: var(--med);
+ box-shadow: 0 7px 14px #000;
 }
 
 h3{
@@ -191,18 +195,30 @@ h3{
 
 .nav-sub-header{
   font-size: 1em;
-  color: var(--dark);
+  color: white;
   text-align: left;
   margin-top: 20px;
   letter-spacing: 4px;
   text-transform: uppercase;
+  cursor: pointer;
+}
+
+
+.down{
+    -moz-transition: all .1s ease;
+    -webkit-transition: all .1s ease;
+    transition: all .1s ease;
+    font-size: 1.2em;
+}
+
+.down.up{
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 
 /* NAVIGATIONS QUEUE */
-
-.queue-nav:hover{
-  cursor: pointer;
-}
 
 .queue-panel{
   height: 100%;
@@ -210,13 +226,14 @@ h3{
   width:100%;
   overflow: scroll;
   margin-bottom: 2em;
-  color:white;
+  color: white;
+  cursor: pointer;
 }
 
 .track-queue{
   padding: 10px;
   color: var(--dark);
-  font-size: .8 em;
+  font-size: .8em;
   line-height: 1.8;
 }
 
@@ -241,6 +258,13 @@ h3{
 
 .queue-hidden{
   display: none;
+}
+
+.queue-note {
+  font-size: 1em;
+  padding: 5px;
+  margin: 0;
+  display: inline;
 }
 
 /* NAVIGATIONS LISTERNERS */
@@ -271,20 +295,19 @@ h3{
  display:flex;
  flex-direction: column;
  flex: 0 0 200px;
- background-color: white;
- color: var(--dark);
  margin-right: 20px;
 }
 
-.playlist:hover{
+/* .playlist:hover{
  cursor:pointer;
-}
+} */
 
 .playlist-titlecard{
  position: relative;
  height: 40px;
  width: 100%;
  background-color: var(--dark);
+ filter: drop-shadow(0px 0px 10px #000);
 }
 
 .nav-img {
@@ -336,8 +359,6 @@ h3{
   width: 100%;
   box-sizing: border-box;
   text-align: left;
-  /* text-transform: uppercase; */
-  /* letter-spacing: 2px; */
   color: white;
   z-index: 0;
   white-space: nowrap;
@@ -346,46 +367,77 @@ h3{
 }
 
 .tracks{
- display:block;
- position:relative;
- top: 0px;
- text-align:left;
- margin-top: 1em;
- height: 200px;
- width: 190px;
- margin-left: 0;
- overflow: scroll;
+  position:relative;
+  top: 0px;
+  text-align:left;
+  margin-top: 1em;
+  height: 200px;
+  width: 200px;
+  /* margin-left: 0; */
+  overflow: scroll;
 }
 
 .track{
- white-space: nowrap;
- overflow: hidden;
- text-overflow: ellipsis;
- padding: 5px 0;
+  padding: 5px 0;
+  position:relative;
+  display:flex;
+  justify-content: space-between;
+  align-items: start;
 }
 
 .note {
- display: inline;
- padding: 10px;
- font-size: .7em;
+  font-size: 1em;
+  padding: 5px;
+  margin: 0;
 }
 
 .playing {
   color: var(--med);
-  display: inline;
-  padding: 10px;
-  font-size: .7em;
+  font-size: 1em;
+  padding: 5px;
+  margin: 0;
 }
 
-.currentTrack{
-  /* background-color: var(--med); */
-  color: var(--med);
+.playlist-names{
+  width: 140px;
+  display: block;
+  margin-right: 5px;
+}
+
+.playlist-track-name{
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 .artist-name-playlist {
-  margin: 5px 0 0 36px;
+  margin: 5px 0;
   font-size: .8em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
+
+.add-to-queue {
+  font-size: 1em;
+  cursor: pointer;
+  padding: 5px;
+  margin: 0;
+}
+
+.add-to-queue:hover{
+  /* background-color: var(--med); */
+}
+
+
+.currentTrack{
+  color: var(--med);
+}
+
+
 
 @media all and (min-width: 900px) {
 
@@ -438,7 +490,8 @@ h3{
     top: 7vw;
     height: 18vw;
     width: 18vw;
-    z-index: 1;
+    z-index: 2;
+    filter: drop-shadow(0px 6px 10px #000);
   }
 
   .info-img img{
@@ -489,12 +542,14 @@ h3{
     position: absolute;
     background-color: var(--dark);
     width: 100%;
-    z-index: 0;
+    z-index: 1;
     top: 12vw;
     height: 4vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    filter: drop-shadow(0px 0px 10px #000);
+
   }
 
   h2 {
@@ -549,13 +604,8 @@ h3{
     display:flex;
     flex-direction: column;
     flex: 0 0 18vw;
-    background-color: white;
-    color: var(--dark);
   }
 
-  .playlist:hover{
-    cursor:pointer;
-  }
 
   .playlist-titlecard{
     position: relative;
@@ -624,17 +674,31 @@ h3{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-bottom: 10px;
-    padding-right: 1em;
   }
 
-  .track:hover{
-    background-color: var(--lighter);
+  .playlist-names:hover{
+    color: var(--lighter);
+  }
+
+  .playlist-names:active{
+    color: var(--med);
   }
 
   .note {
-    display: inline;
-    padding: 10px;
-    font-size: .7em;
+    font-size: 1em;
   }
+
+  .playing{
+    font-size: 1em;
+  }
+
+  .playlist-names{
+    /* max-width: 200px; */
+    min-width: 100px;
+  }
+
+  .add-to-queue{
+    font-size: 1em;
+  }
+
 }
