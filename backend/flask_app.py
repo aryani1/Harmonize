@@ -34,6 +34,7 @@ if process_env is not None and process_env == 'production':
 else:
     client = MongoClient('localhost', 27017)
     redirect_uri='http://127.0.0.1:5000/authorize_success'
+    test_client = 'aurorabrun'
 
 client_id = os.environ['CLIENT_ID']
 client_secret = os.environ['CLIENT_SECRET']
@@ -50,26 +51,6 @@ db = client['harmonize']
 Decorator functions for authenticating and getting
 the access token before calling the function.
 '''
-def auth_process(func):
-    @wraps(func)
-    def authorization_wrapper():
-        username   = request.cookies.get('username')
-        session_id = request.cookies.get('session_id')
-
-        if username and session_id:
-            print('wtf')
-            stored_user = db.users.find({'_id':username})
-            if stored_user.count() < 1 or not is_matching_sessions(stored_user[0], request.cookies):
-                func(None)
-
-        print('auth_process: authenticated ')
-        cache_path = '.cache-' + username
-
-        sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri,
-        scope=scope, cache_path=cache_path)
-        return func(sp_oauth)
-    return authorization_wrapper
-
 # Return a spotify authorization token if it
 # exists in the cache. Otherwise create a new
 # one.
@@ -78,25 +59,32 @@ def auth_process(func):
 def check_cache(func):
     @wraps(func)
     def save_and_cache_wrapper(**kwargs):
-        username    = request.cookies.get('username')
-        session_id  = request.cookies.get('session_id')
+        if process_env:
+            username    = request.cookies.get('username')
+            session_id  = request.cookies.get('session_id')
 
-        print(username)
-        print(session_id)
+            print(username)
+            print(session_id)
 
-        if not username and not session_id:
-            print('check_cache: Username or session did not match')
-            return func(None)
+            if not username and not session_id:
+                print('check_cache: Username or session did not match')
+                return func(None)
 
-        stored_user = db.users.find({'_id':username})
-        if stored_user.count() < 1 or not is_matching_sessions(stored_user[0], request.cookies):
-            return func(None)
-        print(stored_user[0]['_id'])
-        print('session matches!')
-        cache_path = '.cache-' + username
-        sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri,
-                                scope=scope, cache_path=cache_path)
-        return func(sp_oauth, **kwargs)
+            stored_user = db.users.find({'_id':username})
+            if stored_user.count() < 1 or not is_matching_sessions(stored_user[0], request.cookies):
+                return func(None)
+            print(stored_user[0]['_id'])
+            print('session matches!')
+            cache_path = '.cache-' + username
+            sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri,
+                                    scope=scope, cache_path=cache_path)
+            return func(sp_oauth, **kwargs)
+        else:
+            # Development vars
+            cache_path = '.cache-' + test_client
+            sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri,
+                                    scope=scope, cache_path=cache_path)
+            return func(sp_oauth, **kwargs)
     return save_and_cache_wrapper
 
 # Returns a spotify authorization token and the

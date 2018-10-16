@@ -12,7 +12,8 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
-    "redux": "^4.0.0"
+    "redux": "^4.0.0",
+    "watch": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -23,6 +24,7 @@
     "prettier-js": "prettier --write src/**/*.js",
     "postinstall": "npm run build"
   },
+  "proxy": "http://localhost:5000",
   "devDependencies": {
     "prettier": "1.14.3"
   }
