@@ -33,12 +33,8 @@ if process_env is not None and process_env == 'production':
     redirect_uri='http://harmonize-app.herokuapp.com/authorize_success'
 else:
     client = MongoClient('localhost', 27017)
-<<<<<<< HEAD
     redirect_uri='http://127.0.0.1:5000/authorize_success'
     test_client = 'aurorabrun'
-=======
-    redirect_uri='http://127.0.0.1:3000'
->>>>>>> 41612fbb1ef61fa7ecf6decb59e6d964336d2896
 
 client_id = os.environ['CLIENT_ID']
 client_secret = os.environ['CLIENT_SECRET']
@@ -134,7 +130,7 @@ def authorize(sp_oauth):
         return redirect(auth_url, code=200)
 
     print('authorize: user is already cached!')
-    return redirect('/', code=302)
+    return redirect('/', code=200)
 
 # Get and cache access token
 @app.route('/authorize_success')
