@@ -34,7 +34,7 @@ if process_env is not None and process_env == 'production':
 else:
     client = MongoClient('localhost', 27017)
     redirect_uri='http://127.0.0.1:5000/authorize_success'
-    test_client = 'aurorabrun'
+    test_client = 'bullenbygg1337'
 
 client_id = os.environ['CLIENT_ID']
 client_secret = os.environ['CLIENT_SECRET']
@@ -127,7 +127,7 @@ def authorize(sp_oauth):
         resp = redirect(auth_url)
         resp.headers['Access-Control-Allow-Origin'] = "https://accounts.spotify.com"
         print(resp.headers)
-        return redirect(auth_url, code=200)
+        return redirect(auth_url, code=401)
 
     print('authorize: user is already cached!')
     return redirect('/', code=200)
