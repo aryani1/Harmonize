@@ -26,15 +26,21 @@ Spotify instances
 spotify = spotipy.Spotify()
 
 # username = 'bullenbygg1337'
+# TODO: fix local usern
 process_env = os.environ.get('ENVIRONMENT')
 if process_env is not None and process_env == 'production':
     mongodb_uri = os.environ['MONGODB_URI']
-    client = MongoClient(mongodb_uri)
+    # client = MongoClient(mongodb_uri)
+    mongodb_uri
+    connection = MongoClient()
+    db = client['harmonize']
+    db.authenticate()
     redirect_uri='http://harmonize-app.herokuapp.com/authorize_success'
 else:
     client = MongoClient('localhost', 27017)
     redirect_uri='http://127.0.0.1:5000/authorize_success'
     test_client = 'bullenbygg1337'
+    db = client['harmonize']
 
 client_id = os.environ['CLIENT_ID']
 client_secret = os.environ['CLIENT_SECRET']
@@ -45,7 +51,7 @@ scope='user-library-read user-modify-playback-state user-modify-playback-state'
 Database
 '''
 
-db = client['harmonize']
+
 
 '''
 Decorator functions for authenticating and getting
