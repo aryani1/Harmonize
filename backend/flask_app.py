@@ -30,7 +30,7 @@ spotify = spotipy.Spotify()
 process_env = os.environ.get('ENVIRONMENT')
 if process_env is not None and process_env == 'production':
     mongodb_uri = os.environ['MONGODB_URI']
-    # client = MongoClient(mongodb_uri)
+    client = MongoClient(mongodb_uri)
     mongodb_uri
     connection = MongoClient()
     db = client['harmonize']
