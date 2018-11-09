@@ -47,12 +47,6 @@ client_secret = os.environ['CLIENT_SECRET']
 scope='user-library-read user-modify-playback-state user-modify-playback-state'
 
 '''
-Database
-'''
-
-
-
-'''
 Decorator functions for authenticating and getting
 the access token before calling the function.
 '''
@@ -111,13 +105,6 @@ def get_username(func):
 
         return func(sp_oauth, user, **kwargs)
     return username_wrapper
-
-@app.route('/lol')
-def lol():
-    return "hello, world"
-
-def search(name):
-    return spotify.search(q='artist:' + name, type='artist')
 
 # Authorize a user
 @app.route('/authorize/')
@@ -205,6 +192,7 @@ def play():
     get_spotify_lib().start_playback() #pylint: disable=E1120
     return "done!"
 
+# Play a specific track.
 @app.route('/play/<track_id>', methods=['GET', 'POST'])
 def play_track(track_id):
     #get_spotify_lib().start_playback(uris=[track_id]) #pylint: disable=E1120
@@ -226,6 +214,7 @@ def get_playlist(sp_oauth, username, playlist_id):
 
     return jsonify(results)
 
+# Get information about the current user.
 @app.route('/user/current_user')
 def get_current_user(sp_oauth):
     token_info = sp_oauth.get_cached_token()
@@ -236,6 +225,8 @@ def get_current_user(sp_oauth):
 
     return str(results)
 
+# Default home page
+####################
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 #@auth_process
@@ -243,6 +234,7 @@ def home_page(path):
     print(build_path)
     print(request.args.get('code', 'lolololol'))
     return send_from_directory(build_path, 'index.html')
+
 '''
 Helper functions
 '''
@@ -270,6 +262,8 @@ def get_user_list(current_user):
             user_list.append(file[7:])
     return user_list
 
+# Set the track for all users that are currently cached.
+# Fix: Only for users in the same group.
 def set_users_track(user_list, track_id, track_list):
     cache_path = '.cache-'
     user_reqs  = []
@@ -292,12 +286,6 @@ def set_users_track(user_list, track_id, track_list):
         prev_time = (time.time() - start_time) * 1000
 
     return "woho!"
-
-# @app.route('/test')
-# def test():
-#     user_list = get_user_list('aurorabrun')
-#     set_users_track(user_list, None)
-#     return str(user_list)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
