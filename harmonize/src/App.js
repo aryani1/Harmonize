@@ -7,7 +7,6 @@ import TrackInfo from './components/trackinfo'
 import TrackQueue from './components/trackQueue'
 import { MdPlaylistPlay, MdKeyboardArrowUp } from "react-icons/md";
 
-
 import './App.css';
 
 const fetchPlaylists = () => {
