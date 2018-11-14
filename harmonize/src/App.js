@@ -68,6 +68,7 @@ class App extends Component {
 
       <div className="App">
         <header className="App-header">
+          <img className="logo" src={require("./artwork/harmonize_logo_yellow.svg")}/>
           <p className="App-title">Harmonize</p>
         </header>
         <div>

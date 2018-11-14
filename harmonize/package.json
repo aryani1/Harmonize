@@ -24,9 +24,9 @@
     "prettier-js": "prettier --write src/**/*.js",
     "postinstall": "npm run build"
   },
-
   "proxy": "http://localhost:5000/",
   "devDependencies": {
-    "prettier": "1.14.3"
+    "prettier": "1.14.3",
+    "svg-inline-loader": "^0.8.0"
   }
 }
